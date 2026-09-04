@@ -1,0 +1,906 @@
+[gd_scene format=3 uid="uid://cqow47bch5ocs"]
+
+[ext_resource type="Texture2D" uid="uid://cnleiu4a2xbs2" path="res://BGSprites/MainBackground1.png" id="1_c6i3y"]
+[ext_resource type="Texture2D" uid="uid://efi6jt0kdvda" path="res://CharacterSprites/DemoCharacter.png" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://dkd243kf3v24v" path="res://main.gd" id="1_uu6xs"]
+[ext_resource type="Texture2D" uid="uid://cel0luuawi7b5" path="res://MonsterSprites/Monster1.png" id="2_3dxm6"]
+[ext_resource type="Texture2D" uid="uid://b0owsx6xrjhlp" path="res://CharacterSprites/WarriorCharacter.png" id="2_fos0i"]
+[ext_resource type="Texture2D" uid="uid://cgsga3txqnndy" path="res://CharacterSprites/ArcherCharacter.png" id="3_3dxm6"]
+[ext_resource type="Texture2D" uid="uid://cmv66r7h7k60d" path="res://UISprites/ButtonBGFrame.png" id="3_03owx"]
+[ext_resource type="Texture2D" uid="uid://dtxm32sc8itde" path="res://UISprites/ButtonArrow.png" id="3_wkp8b"]
+[ext_resource type="Texture2D" uid="uid://8ubywkcn8yv7" path="res://CharacterSprites/MageCharacter.png" id="4_lgr22"]
+[ext_resource type="Texture2D" uid="uid://kl4ix76lwlms" path="res://UISprites/ButtonDescrFrame.png" id="5_wkp8b"]
+[ext_resource type="Texture2D" uid="uid://c0wb7ctauxf1g" path="res://CharacterSprites/ClericCharacter.png" id="7_lgr22"]
+[ext_resource type="Texture2D" uid="uid://b1x0wey55vo3q" path="res://CharacterSprites/BeastmasterCharacter.png" id="12_5tuhn"]
+[ext_resource type="Texture2D" uid="uid://den5e6s1uiyrh" path="res://UISprites/MonsterHealthFill.png" id="12_c6i3y"]
+[ext_resource type="Texture2D" uid="uid://b6gybfmxwufw0" path="res://UpgradeSprites/ArcherUpgrade1ButtonFrame.png" id="12_fpfj3"]
+[ext_resource type="Texture2D" uid="uid://bax5wnrn8uw4s" path="res://CharacterSprites/DraconicSorcererCharacter.png" id="13_2gh4u"]
+[ext_resource type="Texture2D" uid="uid://coahesk72qquc" path="res://UISprites/MonsterHealthFrame.png" id="13_c2ibq"]
+[ext_resource type="Texture2D" uid="uid://dwt0hfpekuw4c" path="res://UISprites/DescrFrames.png" id="14_c2ibq"]
+[ext_resource type="Texture2D" uid="uid://bguawulht7tks" path="res://CharacterSprites/ChanglingCharacter.png" id="14_devvj"]
+[ext_resource type="Texture2D" uid="uid://bt4mjp7421kvn" path="res://CharacterSprites/MonarchCharacter.png" id="15_3b0ty"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_c6i3y"]
+
+[sub_resource type="Theme" id="Theme_20pc6"]
+
+[node name="Main" type="TextureRect" unique_id=863636125]
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_c6i3y")
+expand_mode = 2
+script = ExtResource("1_uu6xs")
+gold = 99999999999
+warriorLevel = 75
+
+[node name="MonsterButton" type="Button" parent="." unique_id=1448257603]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.0
+offset_top = -104.0
+offset_right = 18.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+icon = SubResource("ImageTexture_c6i3y")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MonsterSprite" type="TextureRect" parent="MonsterButton" unique_id=20756856]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -88.5
+offset_right = 80.0
+offset_bottom = 71.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3dxm6")
+
+[node name="GoldGainedLabel" type="RichTextLabel" parent="MonsterButton" unique_id=1290929912]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 158.33334
+offset_right = 132.77779
+offset_bottom = 222.22223
+theme_override_font_sizes/normal_font_size = 12
+text = "+x gold"
+
+[node name="NextMonsterButton" type="Button" parent="." unique_id=344288879]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = 12.0
+offset_right = -292.0
+offset_bottom = 180.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("3_wkp8b")
+flat = true
+
+[node name="LastMonsterButton" type="Button" parent="." unique_id=235897341]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 459.0
+offset_top = 97.0
+offset_right = 627.0
+offset_bottom = 265.0
+grow_vertical = 2
+rotation = 3.1415927
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("3_wkp8b")
+flat = true
+
+[node name="UnitLabel" type="Label" parent="." unique_id=1285027779]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.5
+offset_right = 45.5
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Gold: 0
+Total DPS: 0.0"
+horizontal_alignment = 1
+
+[node name="MonsterLabel" type="Label" parent="." unique_id=271437802]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 72.0
+offset_right = 128.0
+offset_bottom = 147.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Monster Name: dead god
+Monster HP: 0 // 0"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MonsterLabel" unique_id=731734078]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+stretch_mode = 2
+
+[node name="HeroContainer" type="ScrollContainer" parent="." unique_id=1108184835]
+layout_mode = 0
+offset_right = 520.0
+offset_bottom = 957.3334
+scale = Vector2(0.75, 0.75)
+theme = SubResource("Theme_20pc6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroContainer" unique_id=1823251333]
+layout_mode = 2
+
+[node name="WarriorButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=1256010961]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_03owx")
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="WarriorSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/WarriorButton" unique_id=1023587277]
+position = Vector2(84, 84)
+scale = Vector2(0.8666667, 0.8666667)
+texture = ExtResource("2_fos0i")
+
+[node name="WarriorDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/WarriorButton" unique_id=1596419082]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="WarriorDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/WarriorButton/WarriorDescr" unique_id=1662190578]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+text = "esryhdfgh ah"
+
+[node name="WarriorPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/WarriorButton" unique_id=2006245801]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="ArcherButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=2046666365]
+visible = false
+layout_mode = 2
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="ArcherSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/ArcherButton" unique_id=180482580]
+position = Vector2(84, 84.66667)
+scale = Vector2(0.8666667, 0.875)
+texture = ExtResource("3_3dxm6")
+
+[node name="ArcherDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/ArcherButton" unique_id=270661070]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="ArcherDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/ArcherButton/ArcherDescr" unique_id=1097535500]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="ArcherPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/ArcherButton" unique_id=410960999]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="MageButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=860098719]
+visible = false
+layout_mode = 2
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="MageSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/MageButton" unique_id=1357582283]
+position = Vector2(84, 84)
+scale = Vector2(0.8666667, 0.8833334)
+texture = ExtResource("4_lgr22")
+
+[node name="MageDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/MageButton" unique_id=387243181]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="MageDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/MageButton/MageDescr" unique_id=984391922]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="MagePrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/MageButton" unique_id=1030594790]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="DemoButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=770210333]
+visible = false
+layout_mode = 2
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="DemoSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/DemoButton" unique_id=1778014808]
+position = Vector2(84.00001, 83.99999)
+scale = Vector2(0.8666667, 0.8666668)
+texture = ExtResource("1_glv2v")
+
+[node name="DemoDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/DemoButton" unique_id=415390972]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="DemoDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/DemoButton/DemoDescr" unique_id=1434757519]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="DemoPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/DemoButton" unique_id=1135375246]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="ClericButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=617166537]
+visible = false
+layout_mode = 2
+icon = ExtResource("3_03owx")
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="ClericSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/ClericButton" unique_id=1439301051]
+position = Vector2(83.333336, 84)
+scale = Vector2(0.875, 0.86666673)
+texture = ExtResource("7_lgr22")
+
+[node name="ClericDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/ClericButton" unique_id=2104442452]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="ClericDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/ClericButton/ClericDescr" unique_id=276147491]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="ClericPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/ClericButton" unique_id=776600479]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="BeastmasterButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=639531415]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_03owx")
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="BeastmasterSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/BeastmasterButton" unique_id=1278867120]
+position = Vector2(84, 84)
+scale = Vector2(0.8666667, 0.8666667)
+texture = ExtResource("12_5tuhn")
+
+[node name="BeastmasterDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/BeastmasterButton" unique_id=1843600944]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="BeastmasterDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/BeastmasterButton/BeastmasterDescr" unique_id=1446076684]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="BeastmasterPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/BeastmasterButton" unique_id=1298975808]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="DraconicSorcererButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=714333813]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_03owx")
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="DraconicSorcererSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/DraconicSorcererButton" unique_id=944552581]
+position = Vector2(84, 84)
+scale = Vector2(0.8666667, 0.8666667)
+texture = ExtResource("13_2gh4u")
+
+[node name="DraconicSorcererDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/DraconicSorcererButton" unique_id=366373168]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="DraconicSorcererDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/DraconicSorcererButton/DraconicSorcererDescr" unique_id=1444503455]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="DraconicSorcererPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/DraconicSorcererButton" unique_id=1300601192]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="ChangelingButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=372296977]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_03owx")
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="ChangelingSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/ChangelingButton" unique_id=75158234]
+position = Vector2(84, 84)
+scale = Vector2(0.8666667, 0.8666667)
+texture = ExtResource("14_devvj")
+
+[node name="ChangelingDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/ChangelingButton" unique_id=1800346073]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="ChangelingDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/ChangelingButton/ChangelingDescr" unique_id=1135840957]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="ChangelingPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/ChangelingButton" unique_id=2083374646]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="MonarchButton" type="Button" parent="HeroContainer/VBoxContainer" unique_id=5367770]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_03owx")
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="MonarchSprite" type="Sprite2D" parent="HeroContainer/VBoxContainer/MonarchButton" unique_id=1091713645]
+position = Vector2(84, 84)
+scale = Vector2(0.8666667, 0.8666667)
+texture = ExtResource("15_3b0ty")
+
+[node name="MonarchDescr" type="TextureRect" parent="HeroContainer/VBoxContainer/MonarchButton" unique_id=1237910388]
+layout_mode = 0
+offset_left = 152.00008
+offset_top = 4.0000005
+offset_right = 472.00006
+offset_bottom = 164.0
+texture = ExtResource("5_wkp8b")
+
+[node name="MonarchDescrText" type="RichTextLabel" parent="HeroContainer/VBoxContainer/MonarchButton/MonarchDescr" unique_id=655596006]
+layout_mode = 0
+offset_left = 42.66658
+offset_top = 30.666668
+offset_right = 278.6666
+offset_bottom = 128.0
+
+[node name="MonarchPrestigeButton" type="Button" parent="HeroContainer/VBoxContainer/MonarchButton" unique_id=1174749786]
+visible = false
+layout_mode = 0
+offset_left = 465.33252
+offset_top = 107.99985
+offset_right = 633.3325
+offset_bottom = 275.99985
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="UpgradeContainer" type="ScrollContainer" parent="." unique_id=102536261]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_right = 128.0
+offset_bottom = -36.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+theme = SubResource("Theme_20pc6")
+
+[node name="GridContainer" type="GridContainer" parent="UpgradeContainer" unique_id=1951887984]
+layout_mode = 2
+columns = 3
+
+[node name="ClickUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1483564781]
+layout_mode = 2
+text = "Click 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="ClickUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1622511192]
+layout_mode = 2
+text = "Click 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="WarriorUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=561779370]
+visible = false
+layout_mode = 2
+text = "Warrior 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="WarriorUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1872191041]
+visible = false
+layout_mode = 2
+text = "Warrior 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="ArcherUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1449867786]
+visible = false
+layout_mode = 2
+text = "Archer 1"
+icon = ExtResource("12_fpfj3")
+flat = true
+icon_alignment = 1
+
+[node name="ArcherUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1823637006]
+visible = false
+layout_mode = 2
+text = "Archer 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="MageUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=81135175]
+visible = false
+layout_mode = 2
+text = "Mage 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="MageUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1826171352]
+visible = false
+layout_mode = 2
+text = "Mage 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="DemoUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=590281759]
+visible = false
+layout_mode = 2
+text = "Demo 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="DemoUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=47098297]
+visible = false
+layout_mode = 2
+text = "Demo 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="ClericUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1459337158]
+visible = false
+layout_mode = 2
+text = "Cleric 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="ClericUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1090393198]
+visible = false
+layout_mode = 2
+text = "Cleric 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="BeastmasterUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=220882863]
+visible = false
+layout_mode = 2
+text = "Beastmaster 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="BeastmasterUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1875106347]
+visible = false
+layout_mode = 2
+text = "Beastmaster 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="DraconicSorcererUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=489743227]
+visible = false
+layout_mode = 2
+text = "Draconic Sorcerer 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="DraconicSorcererUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=127209773]
+visible = false
+layout_mode = 2
+text = "Draconic Sorcerer 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="ChangelingUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1915497318]
+visible = false
+layout_mode = 2
+text = "Changeling 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="ChangelingUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1933144493]
+visible = false
+layout_mode = 2
+text = "Changeling 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="MonarchUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=815260949]
+visible = false
+layout_mode = 2
+text = "Monarch 1"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="MonarchUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=2037364309]
+visible = false
+layout_mode = 2
+text = "Monarch 2"
+icon = ExtResource("3_03owx")
+flat = true
+icon_alignment = 1
+
+[node name="MonsterHealthFill" type="TextureProgressBar" parent="." unique_id=1063444316]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 152.0
+offset_right = 800.0
+offset_bottom = 232.0
+scale = Vector2(1, 0.5)
+step = 3.125
+value = 34.375
+texture_progress = ExtResource("12_c6i3y")
+
+[node name="MonsterHealthFrame" type="TextureRect" parent="MonsterHealthFill" unique_id=1152457626]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+texture = ExtResource("13_c2ibq")
+stretch_mode = 2
+
+[node name="MonsterHPResetBar" type="TextureProgressBar" parent="MonsterHealthFill" unique_id=1386712224]
+layout_mode = 0
+offset_top = -10.0
+offset_right = 320.0
+offset_bottom = 70.0
+scale = Vector2(1, 0.1)
+max_value = 300.0
+value = 100.0
+fill_mode = 1
+texture_progress = ExtResource("12_c6i3y")
+tint_progress = Color(0, 2.0038323, 0, 1)
+
+[node name="TempDescrBox" type="TextureRect" parent="." unique_id=1974581515]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_top = -208.0
+offset_right = 636.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("14_c2ibq")
+expand_mode = 1
+
+[node name="TempDescrBox" type="RichTextLabel" parent="TempDescrBox" unique_id=503770336]
+layout_direction = 2
+layout_mode = 1
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 184.0
+theme_override_font_sizes/normal_font_size = 14
+text = "Here's the rich text label"
+
+[node name="GoldPrestigeLabel" type="RichTextLabel" parent="." unique_id=491220298]
+layout_mode = 0
+offset_left = 841.0
+offset_top = 7.0
+offset_right = 864.5
+offset_bottom = 30.0
+text = "42"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="GoldPrestigeButton" type="Button" parent="GoldPrestigeLabel" unique_id=1468364850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PrestigeBonuses" type="Button" parent="." unique_id=155004170]
+layout_mode = 0
+offset_left = 828.00006
+offset_top = 31.0
+offset_right = 996.00006
+offset_bottom = 199.0
+scale = Vector2(0.3, 0.2)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="PrestigeBonusMenu" type="TextureRect" parent="PrestigeBonuses" unique_id=1893333169]
+visible = false
+layout_mode = 0
+offset_left = -1313.3335
+offset_top = 155.0
+offset_right = 83.33325
+offset_bottom = 875.0
+texture = ExtResource("14_c2ibq")
+
+[node name="PrestigeBonus1" type="Button" parent="PrestigeBonuses/PrestigeBonusMenu" unique_id=426258788]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 88.0
+offset_top = -266.0
+offset_right = 256.0
+offset_bottom = -98.0
+grow_vertical = 2
+scale = Vector2(2, 2)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="PrestigeBonus2" type="Button" parent="PrestigeBonuses/PrestigeBonusMenu" unique_id=1804418590]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.00037
+offset_top = -266.0
+offset_right = 0.9996338
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="PrestigeBonus3" type="Button" parent="PrestigeBonuses/PrestigeBonusMenu" unique_id=174106353]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -424.99976
+offset_top = -266.0
+offset_right = -256.99976
+offset_bottom = -98.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+icon = ExtResource("3_03owx")
+flat = true
+
+[node name="PrestigeUpgradeDescrBox" type="TextureRect" parent="PrestigeBonuses/PrestigeBonusMenu" unique_id=1686463396]
+layout_mode = 0
+offset_left = 136.667
+offset_top = 420.0
+offset_right = 1263.334
+offset_bottom = 900.0
+texture = ExtResource("14_c2ibq")
+
+[node name="PrestigeUpgradeDescrBoxText" type="RichTextLabel" parent="PrestigeBonuses/PrestigeBonusMenu/PrestigeUpgradeDescrBox" unique_id=582766630]
+layout_mode = 0
+offset_left = 66.66636
+offset_top = 55.0
+offset_right = 397.7775
+offset_bottom = 178.33334
+scale = Vector2(3, 3)
+text = "Test"
+
+[node name="TestButton" type="Button" parent="." unique_id=406852374]
+layout_mode = 0
+offset_left = 812.0
+offset_top = 131.0
+offset_right = 894.0
+offset_bottom = 201.0
+text = "Full
+Reset
+Button"
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="MonsterButton" to="." method="_on_monster_button_pressed"]
+[connection signal="pressed" from="NextMonsterButton" to="." method="_on_next_monster_button_pressed"]
+[connection signal="pressed" from="LastMonsterButton" to="." method="_on_last_monster_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/WarriorButton" to="." method="_on_warrior_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/WarriorButton/WarriorPrestigeButton" to="." method="_on_warrior_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/ArcherButton" to="." method="_on_archer_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/ArcherButton/ArcherPrestigeButton" to="." method="_on_archer_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/MageButton" to="." method="_on_mage_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/MageButton/MagePrestigeButton" to="." method="_on_mage_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/DemoButton" to="." method="_on_demo_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/DemoButton/DemoPrestigeButton" to="." method="_on_demo_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/ClericButton" to="." method="_on_cleric_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/ClericButton/ClericPrestigeButton" to="." method="_on_cleric_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/BeastmasterButton" to="." method="_on_beastmaster_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/BeastmasterButton/BeastmasterPrestigeButton" to="." method="_on_beastmaster_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/DraconicSorcererButton" to="." method="_on_draconic_sorcerer_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/DraconicSorcererButton/DraconicSorcererPrestigeButton" to="." method="_on_draconic_sorcerer_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/ChangelingButton" to="." method="_on_changeling_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/ChangelingButton/ChangelingPrestigeButton" to="." method="_on_changeling_prestige_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/MonarchButton" to="." method="_on_monarch_button_pressed"]
+[connection signal="pressed" from="HeroContainer/VBoxContainer/MonarchButton/MonarchPrestigeButton" to="." method="_on_monarch_prestige_button_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ClickUpgrade1" to="." method="_on_click_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ClickUpgrade2" to="." method="_on_click_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/WarriorUpgrade1" to="." method="_on_warrior_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/WarriorUpgrade2" to="." method="_on_warrior_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ArcherUpgrade1" to="." method="_on_archer_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ArcherUpgrade2" to="." method="_on_archer_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/MageUpgrade1" to="." method="_on_mage_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/MageUpgrade2" to="." method="_on_mage_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/DemoUpgrade1" to="." method="_on_demo_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/DemoUpgrade2" to="." method="_on_demo_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ClericUpgrade1" to="." method="_on_cleric_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ClericUpgrade2" to="." method="_on_cleric_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/BeastmasterUpgrade1" to="." method="_on_beastmaster_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/BeastmasterUpgrade2" to="." method="_on_beastmaster_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/DraconicSorcererUpgrade1" to="." method="_on_draconic_sorcerer_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/DraconicSorcererUpgrade2" to="." method="_on_draconic_sorcerer_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ChangelingUpgrade1" to="." method="_on_changeling_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/ChangelingUpgrade2" to="." method="_on_changeling_upgrade_2_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/MonarchUpgrade1" to="." method="_on_monarch_upgrade_1_pressed"]
+[connection signal="pressed" from="UpgradeContainer/GridContainer/MonarchUpgrade2" to="." method="_on_monarch_upgrade_2_pressed"]
+[connection signal="pressed" from="GoldPrestigeLabel/GoldPrestigeButton" to="." method="_on_gold_prestige_button_pressed"]
+[connection signal="pressed" from="PrestigeBonuses" to="." method="_on_prestige_bonuses_pressed"]
+[connection signal="pressed" from="PrestigeBonuses/PrestigeBonusMenu/PrestigeBonus1" to="." method="_on_prestige_bonus_1_pressed"]
+[connection signal="pressed" from="PrestigeBonuses/PrestigeBonusMenu/PrestigeBonus2" to="." method="_on_prestige_bonus_2_pressed"]
+[connection signal="pressed" from="PrestigeBonuses/PrestigeBonusMenu/PrestigeBonus3" to="." method="_on_prestige_bonus_3_pressed"]
+[connection signal="pressed" from="TestButton" to="." method="_on_test_button_pressed"]
