@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="BigNumber" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A high-performance Big Number class designed for idle, incremental, and strategy games requiring massive numbers.
+	</brief_description>
+	<description>
+		[BigNumber] handles numbers that far exceed the limits of standard 64-bit integers and floating-point types, efficiently.
+
+		Internally, it uses a mantissa and exponent representation (similar to scientific notation), allowing it to store and manipulate vastly large numbers while maintaining relevant precision.
+
+		It provides a robust suite of formatting methods to present these large numbers in user-friendly ways, including:
+		- [b]Scientific notation:[/b] Standard scientific format (e.g., "1.23e15").
+		- [b]Metric symbols:[/b] SI prefixes like k, M, G, T, P, E (e.g., "1.5M").
+		- [b]Metric names:[/b] Full names like million, billion, trillion (e.g., "1.5 million").
+		- [b]Short Scale names:[/b] Standard short scale names up to novemdecillion (e.g., "2.3 billion").
+		- [b]AA notation:[/b] Alphabetical notation often used in mobile idle games (e.g., "aa", "ab", "ac").
+
+		Note: While this class manages extremely large numbers, it is a floating-point based "Big Number" implementation, not an arbitrary-precision integer library (like GMP). It trades absolute precision at the lowest decimal places for extreme range and performance, which is ideal for game mechanics.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="absolute" qualifiers="const">
+			<return type="BigNumber" />
+			<description>
+				Returns a new [BigNumber] containing the absolute value of this number (always positive).
+			</description>
+		</method>
+		<method name="divide" qualifiers="const">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Divides the current number by [param n] and returns the result as a new [BigNumber].
+				[param n] can be a [BigNumber], [float], [int], or a scientific notation [String].
+			</description>
+		</method>
+		<method name="divide_equals">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Divides the current number by [param n] in-place, modifying this object. Returns self to allow chaining.
+			</description>
+		</method>
+		<method name="floor_value">
+			<return type="void" />
+			<description>
+				Rounds this number down to the nearest whole integer.
+			</description>
+		</method>
+		<method name="get_options" qualifiers="static">
+			<return type="Dictionary" />
+			<description>
+				Returns the global configuration dictionary used for text formatting.
+				You can modify the values in this dictionary to globally change how numbers are formatted (e.g., the number of decimal places, separators, etc.).
+
+				Options include:
+				- [code]scientific_decimals[/code]: Number of decimal places for scientific notation.
+				- [code]thousand_separator[/code]: Character used for thousands (e.g., ",").
+				- [code]decimal_separator[/code]: Character used for decimals (e.g., ".").
+				- [code]small_decimals[/code], [code]thousand_decimals[/code], [code]big_decimals[/code]: Precision settings for different ranges in prefix formatting.
+			</description>
+		</method>
+		<method name="is_equal_to" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Returns [code]true[/code] if this number is numerically approximate to [param n].
+			</description>
+		</method>
+		<method name="is_greater_than" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Returns [code]true[/code] if this number is strictly greater than [param n].
+			</description>
+		</method>
+		<method name="is_greater_than_or_equal_to" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Returns [code]true[/code] if this number is greater than or equal to [param n].
+			</description>
+		</method>
+		<method name="is_less_than" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Returns [code]true[/code] if this number is strictly less than [param n].
+			</description>
+		</method>
+		<method name="is_less_than_or_equal_to" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Returns [code]true[/code] if this number is less than or equal to [param n].
+			</description>
+		</method>
+		<method name="ln" qualifiers="const">
+			<return type="float" />
+			<description>
+				Calculates the natural logarithm (base [i]e[/i]) of the number. Useful for logarithmic formulas often found in game balancing.
+			</description>
+		</method>
+		<method name="log10" qualifiers="const">
+			<return type="float" />
+			<description>
+				Calculates the base-10 logarithm of the number. This is very fast and useful for determining orders of magnitude.
+			</description>
+		</method>
+		<method name="minus" qualifiers="const">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Subtracts [param n] from the current number and returns the result as a new [BigNumber].
+			</description>
+		</method>
+		<method name="minus_equals">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Subtracts [param n] from the current number in-place, modifying this object. Returns self.
+			</description>
+		</method>
+		<method name="mod" qualifiers="const">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Calculates the modulo (remainder) of this number divided by [param n].
+			</description>
+		</method>
+		<method name="multiply" qualifiers="const">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Multiplies the current number by [param n] and returns the result as a new [BigNumber].
+			</description>
+		</method>
+		<method name="multiply_equals">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Multiplies the current number by [param n] in-place, modifying this object. Returns self.
+			</description>
+		</method>
+		<method name="normalize">
+			<return type="void" />
+			<description>
+				Canonicalizes the internal representation so that the mantissa is between [code]1.0[/code] (inclusive) and [code]10.0[/code] (exclusive). This is called automatically after most operations, but can be called manually if you modify properties directly.
+			</description>
+		</method>
+		<method name="plus" qualifiers="const">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Adds [param n] to the current number and returns the result as a new [BigNumber].
+			</description>
+		</method>
+		<method name="plus_equals">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Adds [param n] to the current number in-place, modifying this object. Returns self to allow chaining.
+			</description>
+		</method>
+		<method name="power" qualifiers="const">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Raises this number to the power of [param n] (exponentiation) and returns a new [BigNumber].
+			</description>
+		</method>
+		<method name="power_equals">
+			<return type="BigNumber" />
+			<param index="0" name="n" type="Variant" />
+			<description>
+				Raises this number to the power of [param n] in-place.
+			</description>
+		</method>
+		<method name="square_root" qualifiers="const">
+			<return type="BigNumber" />
+			<description>
+				Returns a new [BigNumber] representing the square root of this number.
+			</description>
+		</method>
+		<method name="to_aa" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="no_decimals_on_small_values" type="bool" default="false" />
+			<param index="1" name="use_thousand_symbol" type="bool" default="true" />
+			<param index="2" name="force_decimals" type="bool" default="false" />
+			<description>
+				Formats the number using generic alphabetic notation (e.g., 1.23aa, 4.50ab), which is popular in many idle games for endless progression.
+				- [param no_decimals_on_small_values]: If true, small numbers (under 1000) will be integers.
+				- [param use_thousand_symbol]: If true, uses 'k' for thousands before switching to 'aa'.
+			</description>
+		</method>
+		<method name="to_float" qualifiers="const">
+			<return type="float" />
+			<description>
+				Converts the number to a standard GDScript [float].
+				[b]Warning:[/b] Standard floats have a maximum value of roughly [code]1.79e308[/code]. If this BigNumber exceeds that, the result will be [code]INF[/code].
+			</description>
+		</method>
+		<method name="to_metric_name" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="no_decimals_on_small_values" type="bool" default="false" />
+			<description>
+				Formats the number using full metric names (e.g., 1.50 million, 2.45 billion).
+				Supported array: kilo, mega, giga, tera, peta, exa, zetta, yotta, ronna, quetta, vunda, uda, treda, sorta, rinta, quexa, pepta, ocha, nena, ming.
+			</description>
+		</method>
+		<method name="to_metric_symbol" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="no_decimals_on_small_values" type="bool" default="false" />
+			<description>
+				Formats the number using standard International System of Units (SI) symbol suffixes (e.g., 1.50 M, 2.45 G).
+				Supported array: k, M, G, T, P, E, Z, Y, R, Q, V, U, Td, S, Ri, Qx, Pp, O, N, Mi.
+				Falls back to scientific notation for larger values.
+			</description>
+		</method>
+		<method name="to_plain_scientific" qualifiers="const">
+			<return type="String" />
+			<description>
+				Returns a raw string representation in scientific format without extra formatting rules (e.g., "1.2345e50"). Useful for serialization or debugging.
+			</description>
+		</method>
+		<method name="to_prefix" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="no_decimals_on_small_values" type="bool" default="false" />
+			<param index="1" name="use_thousand_symbol" type="bool" default="true" />
+			<param index="2" name="force_decimals" type="bool" default="true" />
+			<param index="3" name="scientific_prefix" type="bool" default="false" />
+			<description>
+				Formats the number using the "Engineering" style, where exponents are multiples of 3. This is the base helper for other formatting methods but can be used directly for custom display logic.
+				- [param force_decimals]: Ensures a fixed number of decimal places are shown.
+			</description>
+		</method>
+		<method name="to_scientific" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="no_decimals_on_small_values" type="bool" default="false" />
+			<param index="1" name="force_decimals" type="bool" default="false" />
+			<description>
+				Formats the number in formatted scientific notation (e.g., "1.23e15").
+				Respects global options for decimal places and separators.
+			</description>
+		</method>
+		<method name="to_short_scale" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="no_decimals_on_small_values" type="bool" default="false" />
+			<description>
+				Formats the number using Standard Short Scale names (e.g., million, billion, trillion, quadrillion, etc.).
+				This format is widely used in Europe and most modern English-speaking countries for financial and large game numbers.
+				Supported range extends up to novemdecillion (10^60).
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="exponent" type="int" setter="set_exponent" getter="get_exponent" default="0">
+			The exponent part of the number. The value is [code]mantissa * 10^exponent[/code].
+		</member>
+		<member name="mantissa" type="float" setter="set_mantissa" getter="get_mantissa" default="1.0">
+			The mantissa (significand) part of the number. When normalized, this is a value [code]&gt;= 1.0[/code] and [code]&lt; 10.0[/code].
+		</member>
+	</members>
+</class>
