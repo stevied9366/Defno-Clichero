@@ -735,12 +735,12 @@ texture = ExtResource("14_c2ibq")
 expand_mode = 1
 
 [node name="TempDescrBox" type="RichTextLabel" parent="TempDescrBox" unique_id=503770336]
-layout_direction = 2
 layout_mode = 1
 offset_left = 24.0
 offset_top = 16.0
 offset_right = 360.0
 offset_bottom = 184.0
+layout_direction = 2
 theme_override_font_sizes/normal_font_size = 14
 text = "Here's the rich text label"
 
