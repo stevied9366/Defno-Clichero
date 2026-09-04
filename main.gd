@@ -1407,3 +1407,4 @@ func _on_monarch_prestige_button_pressed() -> void:
 		print(str(monarchAscendPoints) + " monarch ascend points.")
 
 # Test comment for github
+# Test comment for github 2
