@@ -1405,3 +1405,6 @@ func _on_monarch_prestige_button_pressed() -> void:
 		_costs_update(monarchCost)
 		_dps_update(monarchTotalDPS)
 		print(str(monarchAscendPoints) + " monarch ascend points.")
+		
+		# test comment for github change test
+	
