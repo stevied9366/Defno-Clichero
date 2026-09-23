@@ -89,33 +89,42 @@ var changelingUpgrade2Level = 0
 var monarchUpgrade1Level = 0
 var monarchUpgrade2Level = 0
 
+var warriorAscendPoints = 0
+var archerAscendPoints = 0
+var mageAscendPoints = 0
+var demoAscendPoints = 0
+var clericAscendPoints = 0
+var beastmasterAscendPoints = 0
+var draconicSorcererAscendPoints = 0
+var changelingAscendPoints = 0
+var monarchAscendPoints = 0
 # generator costs
 var warriorCost = \
-		(10 * (1 - (.02 * warriorUpgrade2Level))) ** (1 + .07 * warriorLevel) * \
+		(10 * (1 - (.02 * warriorUpgrade2Level)) * (1 - (.01 * warriorAscendPoints))) ** (1 + .07 * warriorLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var archerCost = \
-		50 ** (1 + .08 * archerLevel) * \
+		(50 * (1 - (.01 * archerAscendPoints))) ** (1 + .08 * archerLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var mageCost = \
-		250 ** (1 + .09 * mageLevel) * \
+		(250  * (1 - (.01 * mageAscendPoints))) ** (1 + .09 * mageLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var demoCost = \
-		1000 ** (1 + .1 * demoLevel) * \
+		(1000 * (1 - (.01 * demoAscendPoints))) ** (1 + .1 * demoLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var clericCost = \
-		2500 ** (1 + .11 * clericLevel) * \
+		(2500 * (1 - (.01 * clericAscendPoints))) ** (1 + .11 * clericLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var beastmasterCost = \
-		5000 ** (1 + 0.12 * beastmasterLevel) * \
+		(5000 * (1 - (.01 * beastmasterAscendPoints))) ** (1 + 0.12 * beastmasterLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var draconicSorcererCost = \
-		10000 ** (1 + 0.13 * draconicSorcererLevel) * \
+		(10000 * (1 - (.01 * draconicSorcererAscendPoints))) ** (1 + 0.13 * draconicSorcererLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var changelingCost = \
-		25000 ** (1 + 0.14 * changelingLevel) * \
+		(25000 * (1 - (.01 * changelingAscendPoints))) ** (1 + 0.14 * changelingLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 var monarchCost = \
-		100000 ** (1 + 0.15 * monarchLevel) * \
+		(100000 * (1 - (.01 * monarchAscendPoints))) ** (1 + 0.15 * monarchLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 
 # upgrade costs - generator cost * 2.5/5
@@ -139,34 +148,24 @@ var monarchUpgrade1Cost = 250000 ** (1 + .18 * monarchUpgrade1Level) * (1 - (.02
 var monarchUpgrade2Cost = 500000 ** (1 + .20 * monarchUpgrade2Level) * (1 - (.02 * prestigeBonus2Level))
 
 # dps rates
-var warriorDPSRate = 2.5 * (1.0 + .1 * warriorUpgrade1Level) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (warriorLevel * .25 * clericUpgrade2Level)
+var warriorDPSRate = 2.5 * (1.0 + .1 * warriorUpgrade1Level) * (1 + (.01 * warriorAscendPoints)) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (warriorLevel * .25 * clericUpgrade2Level)
 var warriorTotalDPS = (warriorLevel + (1 * monarchUpgrade2Level)) * warriorDPSRate
-var archerDPSRate = 5 * (1 + .25 * archerUpgrade1Level) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (archerLevel * .25 * clericUpgrade2Level)
+var archerDPSRate = 5 * (1 + .25 * archerUpgrade1Level) * (1 + (.01 * archerAscendPoints)) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (archerLevel * .25 * clericUpgrade2Level)
 var archerTotalDPS = (archerLevel + (1 * monarchUpgrade2Level)) * archerDPSRate
-var mageDPSRate = 10 * (1 + .3 * mageUpgrade1Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (mageLevel * .25 * clericUpgrade2Level)
+var mageDPSRate = 10 * (1 + .3 * mageUpgrade1Level) * (1 + (.01 * mageAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (mageLevel * .25 * clericUpgrade2Level)
 var mageTotalDPS = (mageLevel + (1 * monarchUpgrade2Level)) * mageDPSRate
-var demoDPSRate = 25 * (1 + .35 * demoUpgrade1Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (demoLevel * .25 * clericUpgrade2Level)
+var demoDPSRate = 25 * (1 + .35 * demoUpgrade1Level) * (1 + (.01 * demoAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (demoLevel * .25 * clericUpgrade2Level)
 var demoTotalDPS = (demoLevel + (1 * monarchUpgrade2Level)) * demoDPSRate
-var clericDPSRate = 20 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+var clericDPSRate = 20 * (1 + (.01 * clericAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 var clericTotalDPS = (clericLevel + (1 * monarchUpgrade2Level)) * clericDPSRate
-var beastmasterDPSRate = 40 * (1 + .05 * beastmasterUpgrade1Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+var beastmasterDPSRate = 40 * (1 + .05 * beastmasterUpgrade1Level) * (1 + (.01 * beastmasterAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 var beastmasterTotalDPS = (beastmasterLevel + (1 * monarchUpgrade2Level)) * beastmasterDPSRate
-var draconicSorcererDPSRate = 65 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+var draconicSorcererDPSRate = 65 * (1 + (.01 * draconicSorcererAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 var draconicSorcererTotalDPS = (draconicSorcererLevel + (1 * monarchUpgrade2Level)) * draconicSorcererDPSRate
-var changelingDPSRate = 90 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+var changelingDPSRate = 90 * (1 + (.01 * changelingAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 var changelingTotalDPS = (changelingLevel + (1 * monarchUpgrade2Level)) * changelingDPSRate
-var monarchDPSRate = 80 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+var monarchDPSRate = 80 * (1 + (.01 * monarchAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 var monarchTotalDPS = monarchLevel * monarchDPSRate
-
-var warriorAscendPoints = 0
-var archerAscendPoints = 0
-var mageAscendPoints = 0
-var demoAscendPoints = 0
-var clericAscendPoints = 0
-var beastmasterAscendPoints = 0
-var draconicSorcererAscendPoints = 0
-var changelingAscendPoints = 0
-var monarchAscendPoints = 0
 
 var clickUpgrade1Level = 0
 var clickUpgrade1Cost = 100 ** (1 + .07 * clickUpgrade1Level)
@@ -268,6 +267,9 @@ func _process(delta: float) -> void:
 	$MonsterLabel.text = \
 		"Monster Name: " + monsterNames[monsterDic[str(monsterFrame)]] + \
 		"\nMonster HP: " + str(monsterHP) + " // " + str(monsterHPMax)
+
+	# TEST if cost upgrade func can be constantly run
+	_costs_update(warriorCost)
 
 	# Gold prestige based on how many digits of gold
 	prestigeGoldGain = len(str(gold)) - 6
@@ -865,6 +867,7 @@ func _save_game():
 			"warriorUpgrade2Cost" : warriorUpgrade2Cost,
 			"warriorDPSRate" : warriorDPSRate,
 			"warriorTotalDPS" : warriorTotalDPS,
+			"warriorAscendPoints" : warriorAscendPoints,
 
 			"archerLevel" : archerLevel,
 			"archerCost" : archerCost,
@@ -874,6 +877,7 @@ func _save_game():
 			"archerUpgrade2Cost" : archerUpgrade2Cost,
 			"archerDPSRate" : archerDPSRate,
 			"archerTotalDPS" : archerTotalDPS,
+			"archerAscendPoints" : archerAscendPoints,
 
 			"mageLevel" : mageLevel,
 			"mageCost" : mageCost,
@@ -883,6 +887,7 @@ func _save_game():
 			"mageUpgrade2Cost" : mageUpgrade2Cost,
 			"mageDPSRate" : mageDPSRate,
 			"mageTotalDPS" : mageTotalDPS,
+			"mageAscendPoints" : mageAscendPoints,
 
 			"demoLevel" : demoLevel,
 			"demoCost" : demoCost,
@@ -892,6 +897,7 @@ func _save_game():
 			"demoUpgrade2Cost" : demoUpgrade2Cost,
 			"demoDPSRate" : demoDPSRate,
 			"demoTotalDPS" : demoTotalDPS,
+			"demoAscendPoints" : demoAscendPoints,
 
 			"clericLevel" : clericLevel,
 			"clericCost" : clericCost,
@@ -901,6 +907,7 @@ func _save_game():
 			"clericUpgrade2Cost" : clericUpgrade2Cost,
 			"clericDPSRate" : clericDPSRate,
 			"clericTotalDPS" : clericTotalDPS,
+			"clericAscendPoints" : clericAscendPoints,
 			
 			"beastmasterLevel" : beastmasterLevel,
 			"beastmasterCost" : beastmasterCost,
@@ -910,6 +917,7 @@ func _save_game():
 			"beastmasterUpgrade2Cost" : beastmasterUpgrade2Cost,
 			"beastmasterDPSRate" : beastmasterDPSRate,
 			"beastmasterTotalDPS" : beastmasterTotalDPS,
+			"beastmasterAscendPoints" : beastmasterAscendPoints,
 			
 			"draconicSorcererLevel" : draconicSorcererLevel,
 			"draconicSorcererCost" : draconicSorcererCost,
@@ -919,6 +927,7 @@ func _save_game():
 			"draconicSorcererUpgrade2Cost" : draconicSorcererUpgrade2Cost,
 			"draconicSorcererDPSRate" : draconicSorcererDPSRate,
 			"draconicSorcererTotalDPS" : draconicSorcererTotalDPS,
+			"draconicSorcererAscendPoints" : draconicSorcererAscendPoints,
 			
 			# changeling variables
 			"changelingLevel" : changelingLevel,
@@ -929,6 +938,7 @@ func _save_game():
 			"changelingUpgrade2Cost" : changelingUpgrade2Cost,
 			"changelingDPSRate" : changelingDPSRate,
 			"changelingTotalDPS" : changelingTotalDPS,
+			"changelingAscendPoints" : changelingAscendPoints,
 			
 			# monarch variables
 			"monarchLevel" : monarchLevel,
@@ -939,6 +949,7 @@ func _save_game():
 			"monarchUpgrade2Cost" : monarchUpgrade2Cost,
 			"monarchDPSRate" : monarchDPSRate,
 			"monarchTotalDPS" : monarchTotalDPS,
+			"monarchAscendPoints" : monarchAscendPoints
 		
 	}
 
@@ -1128,7 +1139,7 @@ func _costs_update(cost):
 # Warrior costs 
 	if cost == warriorCost:
 		warriorCost = \
-		(10 * (1 - (.02 * warriorUpgrade2Level))) ** (1 + .07 * warriorLevel) * \
+		(10 * (1 - (.02 * warriorUpgrade2Level)) * (1 - (.01 * warriorAscendPoints))) ** (1 + .07 * warriorLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == warriorUpgrade1Cost:
 		warriorUpgrade1Cost = (25 * (1 - (.01 * warriorUpgrade2Level))) ** (1 + .07 * warriorUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1137,7 +1148,7 @@ func _costs_update(cost):
 # Archer costs
 	if cost == archerCost:
 		archerCost = \
-		50 ** (1 + .08 * archerLevel) * \
+		(50 * (1 - (.01 * archerAscendPoints))) ** (1 + .08 * archerLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == archerUpgrade1Cost:
 		archerUpgrade1Cost = 125 ** (1 + .08 * archerUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1146,7 +1157,7 @@ func _costs_update(cost):
 # Mage costs
 	if cost == mageCost:
 		mageCost = \
-		250 ** (1 + .09 * mageLevel) * \
+		(250 * (1 - (.01 * mageAscendPoints))) ** (1 + .09 * mageLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == mageUpgrade1Cost:
 		mageUpgrade1Cost = 625 ** (1 + .09 * mageUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1155,7 +1166,7 @@ func _costs_update(cost):
 # Demo costs
 	if cost == demoCost:
 		demoCost = \
-		1000 ** (1 + .1 * demoLevel) * \
+		(1000 * (1 - (.01 * demoAscendPoints))) ** (1 + .1 * demoLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == demoUpgrade1Cost:
 		demoUpgrade1Cost = 2500 ** (1 + .09 * demoUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1164,7 +1175,7 @@ func _costs_update(cost):
 # Cleric costs
 	if cost == clericCost:
 		clericCost = \
-		2500 ** (1 + .11 * clericLevel) * \
+		(2500 * (1 - (.01 * clericAscendPoints))) ** (1 + .11 * clericLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == clericUpgrade1Cost:
 		clericUpgrade1Cost = 6250 ** (1 + .1 * clericUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1173,7 +1184,7 @@ func _costs_update(cost):
 # Beastmaster costs
 	if cost == beastmasterCost:
 		beastmasterCost = \
-		5000 ** (1 + 0.12 * beastmasterLevel) * \
+		(5000 * (1 - (.01 * beastmasterAscendPoints))) ** (1 + 0.12 * beastmasterLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == beastmasterUpgrade1Cost: 
 		beastmasterUpgrade1Cost = 12500 ** (1 + .11 * beastmasterUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1182,7 +1193,7 @@ func _costs_update(cost):
 # Draconic Sorcerer costs
 	if cost == draconicSorcererCost:
 		draconicSorcererCost = \
-		10000 ** (1 + 0.13 * draconicSorcererLevel) * \
+		(10000 * (1 - (.01 * draconicSorcererAscendPoints))) ** (1 + 0.13 * draconicSorcererLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == draconicSorcererUpgrade1Cost:
 		draconicSorcererUpgrade1Cost = 25000 ** (1 + .14 * draconicSorcererUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1191,7 +1202,7 @@ func _costs_update(cost):
 # Changeling costs
 	if cost == changelingCost:
 		changelingCost = \
-		25000 ** (1 + 0.14 * changelingLevel) * \
+		(25000 * (1 - (.01 * changelingAscendPoints))) ** (1 + 0.14 * changelingLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == changelingUpgrade1Cost:
 		changelingUpgrade1Cost = 62500 ** (1 + .16 * changelingUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1200,7 +1211,7 @@ func _costs_update(cost):
 # Monarch costs
 	if cost == monarchCost:
 		monarchCost = \
-		100000 ** (1 + 0.15 * monarchLevel) * \
+		(100000 * (1 - (.01 * monarchAscendPoints))) ** (1 + 0.15 * monarchLevel) * \
 		(1 - (.02 * prestigeBonus2Level) - (.01 * beastmasterUpgrade2Level) - ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level))
 	if cost == monarchUpgrade1Cost:
 		monarchUpgrade1Cost = 250000 ** (1 + .18 * monarchUpgrade1Level) * (1 - (.02 * prestigeBonus2Level))
@@ -1223,39 +1234,39 @@ func _stats_update(stat):
 func _dps_update(unitDPS):
 # Warrior DPS
 	if unitDPS == warriorTotalDPS:
-		warriorDPSRate = 2.5 * (1.0 + .1 * warriorUpgrade1Level) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (warriorLevel * .25 * clericUpgrade2Level)
+		warriorDPSRate = 2.5 * (1.0 + .1 * warriorUpgrade1Level) * (1 + (.01 * warriorAscendPoints)) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (warriorLevel * .25 * clericUpgrade2Level)
 		warriorTotalDPS = (warriorLevel + (1 * monarchUpgrade2Level)) * warriorDPSRate
 # Archer DPS
 	if unitDPS == archerTotalDPS:
-		archerDPSRate = 5 * (1 + .25 * archerUpgrade1Level) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (archerLevel * .25 * clericUpgrade2Level)
+		archerDPSRate = 5 * (1 + .25 * archerUpgrade1Level) * (1 + (.01 * archerAscendPoints)) * (1 + .015 * mageUpgrade2Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (archerLevel * .25 * clericUpgrade2Level)
 		archerTotalDPS = (archerLevel + (1 * monarchUpgrade2Level)) * archerDPSRate
 # Mage DPS
 	if unitDPS == mageTotalDPS:
-		mageDPSRate = 10 * (1 + .3 * mageUpgrade1Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (mageLevel * .25 * clericUpgrade2Level)
+		mageDPSRate = 10 * (1 + .3 * mageUpgrade1Level) * (1 + (.01 * mageAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (mageLevel * .25 * clericUpgrade2Level)
 		mageTotalDPS = (mageLevel + (1 * monarchUpgrade2Level)) * mageDPSRate
 # Demo DPS
 	if unitDPS == demoTotalDPS:
-		demoDPSRate = 25 * (1 + .35 * demoUpgrade1Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (demoLevel * .25 * clericUpgrade2Level)
+		demoDPSRate = 25 * (1 + .35 * demoUpgrade1Level) * (1 + (.01 * demoAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + (demoLevel * .25 * clericUpgrade2Level)
 		demoTotalDPS = (demoLevel + (1 * monarchUpgrade2Level)) * demoDPSRate
 # Cleric DPS
 	if unitDPS == clericTotalDPS:
-		clericDPSRate = 20 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+		clericDPSRate = 20 * (1 + (.01 * clericAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 		clericTotalDPS = (clericLevel + (1 * monarchUpgrade2Level)) * clericDPSRate
 # Beastmaster DPS
 	if unitDPS == beastmasterTotalDPS:
-		beastmasterDPSRate = 40 * (1 + .05 * beastmasterUpgrade1Level) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+		beastmasterDPSRate = 40 * (1 + .05 * beastmasterUpgrade1Level) * (1 + (.01 * beastmasterAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 		beastmasterTotalDPS = (beastmasterLevel + (1 * monarchUpgrade2Level)) * beastmasterDPSRate
 # Draconic Sorcerer DPS
 	if unitDPS == draconicSorcererTotalDPS:
-		draconicSorcererDPSRate = 65 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+		draconicSorcererDPSRate = 65 * (1 + (.01 * draconicSorcererAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 		draconicSorcererTotalDPS = (draconicSorcererLevel + (1 * monarchUpgrade2Level)) * draconicSorcererDPSRate
 # Changeling DPS
 	if unitDPS == changelingTotalDPS:
-		changelingDPSRate = 90 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+		changelingDPSRate = 90 * (1 + (.01 * changelingAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 		changelingTotalDPS = (changelingLevel + (1 * monarchUpgrade2Level)) * changelingDPSRate
 # Monarch DPS
 	if unitDPS == monarchTotalDPS:
-		monarchDPSRate = 80 * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
+		monarchDPSRate = 80 * (1 + (.01 * monarchAscendPoints)) * (1 + .1 * draconicSorcererUpgrade2Level) * (1 + (.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level)
 		monarchTotalDPS = monarchLevel * monarchDPSRate
 
 func _generator_purchase():
@@ -1336,7 +1347,7 @@ func _hide_units_and_upgrades():
 
 func _on_warrior_prestige_button_pressed() -> void:
 	if warriorLevel >= 25:
-		warriorAscendPoints = floor(warriorLevel / 25)
+		warriorAscendPoints += floor(warriorLevel / 25)
 		warriorLevel = 0
 		_costs_update(warriorCost)
 		_dps_update(warriorTotalDPS)
@@ -1344,7 +1355,7 @@ func _on_warrior_prestige_button_pressed() -> void:
 
 func _on_archer_prestige_button_pressed() -> void:
 	if archerLevel >= 25:
-		archerAscendPoints = floor(archerLevel / 25)
+		archerAscendPoints += floor(archerLevel / 25)
 		archerLevel = 0
 		_costs_update(archerCost)
 		_dps_update(archerTotalDPS)
@@ -1352,7 +1363,7 @@ func _on_archer_prestige_button_pressed() -> void:
 
 func _on_mage_prestige_button_pressed() -> void:
 	if mageLevel >= 25:
-		mageAscendPoints = floor(mageLevel / 25)
+		mageAscendPoints += floor(mageLevel / 25)
 		mageLevel = 0
 		_costs_update(mageCost)
 		_dps_update(mageTotalDPS)
@@ -1360,7 +1371,7 @@ func _on_mage_prestige_button_pressed() -> void:
 
 func _on_demo_prestige_button_pressed() -> void:
 	if demoLevel >= 25:
-		demoAscendPoints = floor(demoLevel / 25)
+		demoAscendPoints += floor(demoLevel / 25)
 		demoLevel = 0
 		_costs_update(demoCost)
 		_dps_update(demoTotalDPS)
@@ -1368,7 +1379,7 @@ func _on_demo_prestige_button_pressed() -> void:
 
 func _on_cleric_prestige_button_pressed() -> void:
 	if clericLevel >= 25:
-		clericAscendPoints = floor(clericLevel / 25)
+		clericAscendPoints += floor(clericLevel / 25)
 		clericLevel = 0
 		_costs_update(clericCost)
 		_dps_update(clericTotalDPS)
@@ -1376,7 +1387,7 @@ func _on_cleric_prestige_button_pressed() -> void:
 
 func _on_beastmaster_prestige_button_pressed() -> void:
 	if beastmasterLevel >= 25:
-		beastmasterAscendPoints = floor(beastmasterLevel / 25)
+		beastmasterAscendPoints += floor(beastmasterLevel / 25)
 		beastmasterLevel = 0
 		_costs_update(beastmasterCost)
 		_dps_update(beastmasterTotalDPS)
@@ -1384,7 +1395,7 @@ func _on_beastmaster_prestige_button_pressed() -> void:
 
 func _on_draconic_sorcerer_prestige_button_pressed() -> void:
 	if draconicSorcererLevel >= 25:
-		draconicSorcererAscendPoints = floor(draconicSorcererLevel / 25)
+		draconicSorcererAscendPoints += floor(draconicSorcererLevel / 25)
 		draconicSorcererLevel = 0
 		_costs_update(draconicSorcererCost)
 		_dps_update(draconicSorcererTotalDPS)
@@ -1392,7 +1403,7 @@ func _on_draconic_sorcerer_prestige_button_pressed() -> void:
 
 func _on_changeling_prestige_button_pressed() -> void:
 	if changelingLevel >= 25:
-		changelingAscendPoints = floor(changelingLevel / 25)
+		changelingAscendPoints += floor(changelingLevel / 25)
 		changelingLevel = 0
 		_costs_update(changelingCost)
 		_dps_update(changelingTotalDPS)
@@ -1400,7 +1411,7 @@ func _on_changeling_prestige_button_pressed() -> void:
 
 func _on_monarch_prestige_button_pressed() -> void:
 	if monarchLevel >= 25:
-		monarchAscendPoints = floor(monarchLevel / 25)
+		monarchAscendPoints += floor(monarchLevel / 25)
 		monarchLevel = 0
 		_costs_update(monarchCost)
 		_dps_update(monarchTotalDPS)
