@@ -181,6 +181,7 @@ var monsterHPMax = (100 + 100 * monsterFrame) * (1 - .015 * mageUpgrade2Level) *
 var monsterHP = monsterHPMax
 var HPResetMax = 300 + (.25 * clericUpgrade1Level) # iterated in delta process, ~5 seconds
 
+
 func _ready():
 	
 	var timer = Timer.new()
@@ -260,7 +261,7 @@ func _process(delta: float) -> void:
 			monsterHP = monsterHPMax
 
 	$UnitLabel.text = \
-		"Gold: " + str(_number_conversion(int(gold))) + \
+		"Gold: " + str(_number_conversion(int(gold))) + "\nDEBUG Full Gold: " + str(gold) + \
 		"\nLifetime Gold: " + str(_number_conversion(lifetimeGold)) + \
 		"   Gold Prestige: " + str(prestigeGold) + \
 		"\nTotal DPS: " + str((warriorTotalDPS + archerTotalDPS + mageTotalDPS + demoTotalDPS + clericTotalDPS + beastmasterTotalDPS + draconicSorcererTotalDPS + changelingTotalDPS + monarchTotalDPS) * (1 +  .05 * archerUpgrade2Level) * (1 + .1 * monarchUpgrade1Level))
@@ -268,9 +269,50 @@ func _process(delta: float) -> void:
 		"Monster Name: " + monsterNames[monsterDic[str(monsterFrame)]] + \
 		"\nMonster HP: " + str(monsterHP) + " // " + str(monsterHPMax)
 
-	# TEST if cost upgrade func can be constantly run
+	# TEST if cost upgrade func can be constantly run (looks like its fine... see how it is when adding the other costs)
 	_costs_update(warriorCost)
 
+	# Flags to make generators and upgrades appear
+	if warriorLevel >= 1:
+			$HeroContainer/VBoxContainer/ArcherButton.show()
+			$UpgradeContainer/GridContainer/WarriorUpgrade1.show()
+			$UpgradeContainer/GridContainer/WarriorUpgrade2.show()
+	if archerLevel >= 1:
+			$HeroContainer/VBoxContainer/MageButton.show()
+			$UpgradeContainer/GridContainer/ArcherUpgrade1.show()
+			$UpgradeContainer/GridContainer/ArcherUpgrade2.show()
+	if mageLevel >= 1:
+			$HeroContainer/VBoxContainer/DemoButton.show()
+			$UpgradeContainer/GridContainer/MageUpgrade1.show()
+			$UpgradeContainer/GridContainer/MageUpgrade2.show()
+	if clericLevel >= 1:
+			$HeroContainer/VBoxContainer/BeastmasterButton.show()
+			$UpgradeContainer/GridContainer/ClericUpgrade1.show()
+			$UpgradeContainer/GridContainer/ClericUpgrade2.show()
+	if demoLevel >= 1:
+			$HeroContainer/VBoxContainer/ClericButton.show()
+			$UpgradeContainer/GridContainer/DemoUpgrade1.show()
+			$UpgradeContainer/GridContainer/DemoUpgrade2.show()
+	if beastmasterLevel >= 1:
+			$HeroContainer/VBoxContainer/DraconicSorcererButton.show()
+			$UpgradeContainer/GridContainer/BeastmasterUpgrade1.show()
+			$UpgradeContainer/GridContainer/BeastmasterUpgrade2.show()
+	if draconicSorcererLevel >= 1:
+			$HeroContainer/VBoxContainer/ChangelingButton.show()
+			$UpgradeContainer/GridContainer/DraconicSorcererUpgrade1.show()
+			$UpgradeContainer/GridContainer/DraconicSorcererUpgrade2.show()
+	if changelingLevel >= 1:
+			$HeroContainer/VBoxContainer/MonarchButton.show()
+			$UpgradeContainer/GridContainer/ChangelingUpgrade1.show()
+			$UpgradeContainer/GridContainer/ChangelingUpgrade2.show()
+	if monarchLevel >= 1:
+			$UpgradeContainer/GridContainer/MonarchUpgrade1.show()
+			$UpgradeContainer/GridContainer/MonarchUpgrade2.show()
+	
+	# Flag to make ascension appear
+	if monarchUpgrade1Level >= 1:
+		_ascension_buttons()
+	
 	# Gold prestige based on how many digits of gold
 	prestigeGoldGain = len(str(gold)) - 6
 
@@ -402,10 +444,6 @@ func _on_warrior_button_pressed() -> void:
 		gold -= warriorCost
 		warriorLevel += 1 
 		_generator_purchase()
-		if warriorLevel >= 1:
-			$HeroContainer/VBoxContainer/ArcherButton.show()
-			$UpgradeContainer/GridContainer/WarriorUpgrade1.show()
-			$UpgradeContainer/GridContainer/WarriorUpgrade2.show()
 		
 func _on_warrior_upgrade_1_pressed() -> void:	# Increases warrior DPS
 	if gold >= warriorUpgrade1Cost:
@@ -429,10 +467,6 @@ func _on_archer_button_pressed() -> void:
 		gold -= archerCost
 		archerLevel += 1
 		_generator_purchase()
-		if archerLevel >= 1:
-			$HeroContainer/VBoxContainer/MageButton.show()
-			$UpgradeContainer/GridContainer/ArcherUpgrade1.show()
-			$UpgradeContainer/GridContainer/ArcherUpgrade2.show()
 
 func _on_archer_upgrade_1_pressed() -> void:	# Increases archer DPS
 	if gold >= archerUpgrade1Cost:
@@ -454,10 +488,7 @@ func _on_mage_button_pressed() -> void:
 		gold -= mageCost
 		mageLevel += 1
 		_generator_purchase()
-		if mageLevel >= 1:
-			$HeroContainer/VBoxContainer/DemoButton.show()
-			$UpgradeContainer/GridContainer/MageUpgrade1.show()
-			$UpgradeContainer/GridContainer/MageUpgrade2.show()
+		
 
 func _on_mage_upgrade_1_pressed() -> void:	# Increases mage DPS
 	if gold >= mageUpgrade1Cost:
@@ -482,10 +513,6 @@ func _on_demo_button_pressed() -> void:
 		gold -= demoCost
 		demoLevel += 1
 		_generator_purchase()
-		if demoLevel >= 1:
-			$HeroContainer/VBoxContainer/ClericButton.show()
-			$UpgradeContainer/GridContainer/DemoUpgrade1.show()
-			$UpgradeContainer/GridContainer/DemoUpgrade2.show()
 
 func _on_demo_upgrade_1_pressed() -> void:	# Increases demo DPS
 	if gold >= demoUpgrade1Cost:
@@ -508,10 +535,7 @@ func _on_cleric_button_pressed() -> void:
 		gold -= clericCost
 		clericLevel += 1
 		_generator_purchase()
-		if clericLevel >= 1:
-			$HeroContainer/VBoxContainer/BeastmasterButton.show()
-			$UpgradeContainer/GridContainer/ClericUpgrade1.show()
-			$UpgradeContainer/GridContainer/ClericUpgrade2.show()
+		
 
 func _on_cleric_upgrade_1_pressed() -> void:	# "Healing" Increases amount of time you have to kill monster
 	if gold >= clericUpgrade1Cost:
@@ -537,10 +561,6 @@ func _on_beastmaster_button_pressed() -> void:
 		gold -= beastmasterCost
 		beastmasterLevel += 1
 		_generator_purchase()
-		if beastmasterLevel >= 1:
-			$HeroContainer/VBoxContainer/DraconicSorcererButton.show()
-			$UpgradeContainer/GridContainer/BeastmasterUpgrade1.show()
-			$UpgradeContainer/GridContainer/BeastmasterUpgrade2.show()
 
 func _on_beastmaster_upgrade_1_pressed() -> void:	# tick speed increase, beastmaster DPS increase
 	if gold >= beastmasterUpgrade1Cost:
@@ -571,11 +591,7 @@ func _on_draconic_sorcerer_button_pressed() -> void:
 		gold -= draconicSorcererCost
 		draconicSorcererLevel += 1
 		_generator_purchase()
-		if draconicSorcererLevel >= 1:
-			$HeroContainer/VBoxContainer/ChangelingButton.show()
-			$UpgradeContainer/GridContainer/DraconicSorcererUpgrade1.show()
-			$UpgradeContainer/GridContainer/DraconicSorcererUpgrade2.show()
-
+		
 func _on_draconic_sorcerer_upgrade_1_pressed() -> void: # increases monster gold range from [1 to 3] to [1 to 3 + level]
 	if gold >= draconicSorcererUpgrade1Cost:
 		gold -= draconicSorcererUpgrade1Cost
@@ -604,11 +620,7 @@ func _on_changeling_button_pressed() -> void:
 		gold -= changelingCost
 		changelingLevel += 1
 		_generator_purchase()
-		if changelingLevel >= 1:
-			$HeroContainer/VBoxContainer/MonarchButton.show()
-			$UpgradeContainer/GridContainer/ChangelingUpgrade1.show()
-			$UpgradeContainer/GridContainer/ChangelingUpgrade2.show()
-	
+		
 func _on_changeling_upgrade_1_pressed() -> void: # -2% to monster max HP per upgrade level
 	if gold >= changelingUpgrade1Cost:
 		gold -= changelingUpgrade1Cost
@@ -643,9 +655,7 @@ func _on_monarch_button_pressed() -> void:
 		gold -= monarchCost
 		monarchLevel += 1
 		_generator_purchase()
-		if monarchLevel >= 1:
-			$UpgradeContainer/GridContainer/MonarchUpgrade1.show()
-			$UpgradeContainer/GridContainer/MonarchUpgrade2.show()
+		
 
 func _on_monarch_upgrade_1_pressed() -> void: #  +1% total DPS, activate ascension
 	if gold >= monarchUpgrade1Cost:
@@ -676,7 +686,6 @@ func _on_click_upgrade_2_pressed() -> void:
 		clickUpgrade2Level += 1
 		_costs_update(clickUpgrade2Cost)
 		_stats_update(clickPower)
-		
 
 func _on_monster_button_pressed() -> void:
 	
@@ -1010,38 +1019,47 @@ func _save_game_reset():
 	warriorLevel = 0
 	warriorUpgrade1Level = 0
 	warriorUpgrade2Level = 0
+	warriorAscendPoints = 0
 	
 	archerLevel = 0
 	archerUpgrade1Level = 0
 	archerUpgrade2Level = 0
+	archerAscendPoints = 0
 	
 	mageLevel = 0
 	mageUpgrade1Level = 0
 	mageUpgrade2Level = 0
+	mageAscendPoints = 0
 	
 	demoLevel = 0
 	demoUpgrade1Level = 0
 	demoUpgrade2Level = 0
+	demoAscendPoints = 0
 	
 	clericLevel = 0
 	clericUpgrade1Level = 0
 	clericUpgrade2Level = 0
+	clericAscendPoints = 0
 	
 	beastmasterLevel = 0
 	beastmasterUpgrade1Level = 0
 	beastmasterUpgrade2Level = 0
+	beastmasterAscendPoints = 0
 	
 	draconicSorcererLevel = 0
 	draconicSorcererUpgrade1Level = 0
 	draconicSorcererUpgrade2Level = 0
+	draconicSorcererAscendPoints = 0
 	
 	changelingLevel = 0
 	changelingUpgrade1Level = 0
 	changelingUpgrade2Level = 0
+	changelingAscendPoints = 0
 	
 	monarchLevel = 0
 	monarchUpgrade1Level = 0
 	monarchUpgrade2Level = 0
+	monarchAscendPoints = 0
 	
 	monsterGold = 1
 	_stats_update(tickSpeed)
@@ -1417,5 +1435,4 @@ func _on_monarch_prestige_button_pressed() -> void:
 		_dps_update(monarchTotalDPS)
 		print(str(monarchAscendPoints) + " monarch ascend points.")
 
-# Test comment for github
-# Test comment for github 2
+# Test comment for github 3
