@@ -338,39 +338,39 @@ func _process(delta: float) -> void:
 	
 	# Generator descriptors
 		# warrior
-	$HeroContainer/VBoxContainer/WarriorButton/WarriorDescr/WarriorDescrText.text  = "Warrior Level: " + str(warriorLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % warriorCost + "\nWarrior DPS: " + str(warriorTotalDPS)
+	$HeroContainer/VBoxContainer/WarriorButton/WarriorDescr/WarriorDescrText.text  = "Warrior Level: " + str(warriorLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(warriorCost))) + "\nWarrior DPS: " + str(warriorTotalDPS)
 	if $HeroContainer/VBoxContainer/WarriorButton/WarriorPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/WarriorButton/WarriorDescr/WarriorDescrText.text = "Ascend your warriors!"
 		# archer
-	$HeroContainer/VBoxContainer/ArcherButton/ArcherDescr/ArcherDescrText.text = "Archer Level: " + str(archerLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % archerCost + "\nArcher DPS: " + str(archerTotalDPS)
+	$HeroContainer/VBoxContainer/ArcherButton/ArcherDescr/ArcherDescrText.text = "Archer Level: " + str(archerLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(archerCost))) + "\nArcher DPS: " + str(archerTotalDPS)
 	if $HeroContainer/VBoxContainer/ArcherButton/ArcherPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/ArcherButton/ArcherDescr/ArcherDescrText.text = "Ascend your archers!"	
 		#mage
-	$HeroContainer/VBoxContainer/MageButton/MageDescr/MageDescrText.text = "Mage Level: " + str(mageLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % mageCost + "\nMage DPS: " + str(mageTotalDPS)
+	$HeroContainer/VBoxContainer/MageButton/MageDescr/MageDescrText.text = "Mage Level: " + str(mageLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(mageCost))) + "\nMage DPS: " + str(mageTotalDPS)
 	if 	$HeroContainer/VBoxContainer/MageButton/MagePrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/MageButton/MageDescr/MageDescrText.text = "Ascend your mages!"
 		# demo
-	$HeroContainer/VBoxContainer/DemoButton/DemoDescr/DemoDescrText.text = "Demo Level: " + str(demoLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % demoCost + "\nDemo DPS: " + str(demoTotalDPS)
+	$HeroContainer/VBoxContainer/DemoButton/DemoDescr/DemoDescrText.text = "Demo Level: " + str(demoLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(demoCost))) + "\nDemo DPS: " + str(demoTotalDPS)
 	if $HeroContainer/VBoxContainer/DemoButton/DemoPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/DemoButton/DemoDescr/DemoDescrText.text = "Ascend your demos!"
 		# cleric
-	$HeroContainer/VBoxContainer/ClericButton/ClericDescr/ClericDescrText.text = "Cleric Level: " + str(clericLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % clericCost + "\nCleric DPS: " + str(clericTotalDPS)
+	$HeroContainer/VBoxContainer/ClericButton/ClericDescr/ClericDescrText.text = "Cleric Level: " + str(clericLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(clericCost))) + "\nCleric DPS: " + str(clericTotalDPS)
 	if $HeroContainer/VBoxContainer/ClericButton/ClericPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/ClericButton/ClericDescr/ClericDescrText.text =  "Ascend your clerics!"
 		# beastmaster
-	$HeroContainer/VBoxContainer/BeastmasterButton/BeastmasterDescr/BeastmasterDescrText.text = "Beastmaster Level: " + str(beastmasterLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % beastmasterCost + "\nBeastmaster DPS: " + str(beastmasterTotalDPS)
+	$HeroContainer/VBoxContainer/BeastmasterButton/BeastmasterDescr/BeastmasterDescrText.text = "Beastmaster Level: " + str(beastmasterLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(beastmasterCost))) + "\nBeastmaster DPS: " + str(beastmasterTotalDPS)
 	if $HeroContainer/VBoxContainer/BeastmasterButton/BeastmasterPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/BeastmasterButton/BeastmasterDescr/BeastmasterDescrText.text =  "Ascend your beastmasters!"
 		# draconic sorcerer
-	$HeroContainer/VBoxContainer/DraconicSorcererButton/DraconicSorcererDescr/DraconicSorcererDescrText.text = "Draconic Sorcerer Level: " + str(draconicSorcererLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % draconicSorcererCost + "\nDraconic Sorcerer DPS: " + str(draconicSorcererTotalDPS)
+	$HeroContainer/VBoxContainer/DraconicSorcererButton/DraconicSorcererDescr/DraconicSorcererDescrText.text = "Draconic Sorcerer Level: " + str(draconicSorcererLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(draconicSorcererCost))) + "\nDraconic Sorcerer DPS: " + str(draconicSorcererTotalDPS)
 	if $HeroContainer/VBoxContainer/DraconicSorcererButton/DraconicSorcererPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/DraconicSorcererButton/DraconicSorcererDescr/DraconicSorcererDescrText.text =  "Ascend your Draconic Sorcerers!"
 		# changeling
-	$HeroContainer/VBoxContainer/ChangelingButton/ChangelingDescr/ChangelingDescrText.text = "Changeling Level: " + str(changelingLevel + (1 * monarchUpgrade2Level)) + "\nCost: %.2f" % changelingCost + "\nChangeling DPS: " + str(changelingTotalDPS)
+	$HeroContainer/VBoxContainer/ChangelingButton/ChangelingDescr/ChangelingDescrText.text = "Changeling Level: " + str(changelingLevel + (1 * monarchUpgrade2Level)) + "\nCost: " + str(_number_conversion(int(changelingCost))) + "\nChangeling DPS: " + str(changelingTotalDPS)
 	if $HeroContainer/VBoxContainer/ChangelingButton/ChangelingPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/ChangelingButton/ChangelingDescr/ChangelingDescrText.text =  "Ascend your changelings!"
 		# monarch
-	$HeroContainer/VBoxContainer/MonarchButton/MonarchDescr/MonarchDescrText.text = "Monarch Level: " + str(monarchLevel) + "\nCost: %.2f" % monarchCost + "\nMonarch DPS: " + str(monarchTotalDPS)
+	$HeroContainer/VBoxContainer/MonarchButton/MonarchDescr/MonarchDescrText.text = "Monarch Level: " + str(monarchLevel) + "\nCost: " + str(_number_conversion(int(monarchCost))) + "\nMonarch DPS: " + str(monarchTotalDPS)
 	if $HeroContainer/VBoxContainer/MonarchButton/MonarchPrestigeButton.is_hovered() == true:
 		$HeroContainer/VBoxContainer/MonarchButton/MonarchDescr/MonarchDescrText.text =  "Ascend your monarchs!"
 	
@@ -386,54 +386,54 @@ func _process(delta: float) -> void:
 	# Description box info
 		# click upgrades
 	if $UpgradeContainer/GridContainer/ClickUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Click Power\nUpgrade Level " + str(clickUpgrade1Level) + "\n+1 damage per click with each upgrade\nCost: %.2f" % clickUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Click Power\nUpgrade Level " + str(clickUpgrade1Level) + "\n+1 damage per click with each upgrade\nCost: " + str(_number_conversion(int(clickUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/ClickUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Click Multiplier\nUpgrade Level " + str(clickUpgrade2Level) + "\n+25%% damage per click with each upgrade\nCost: %.2f" % clickUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Click Multiplier\nUpgrade Level " + str(clickUpgrade2Level) + "\n+25%% damage per click with each upgrade\nCost: " + str(_number_conversion(int(clickUpgrade2Cost)))
 		# warrior upgrades
 	if $UpgradeContainer/GridContainer/WarriorUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Sword Sharpener\nUpgrade Level " + str(warriorUpgrade1Level) + "\n+10%% damage per warrior with each upgrade\nCost: %.2f" % warriorUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Sword Sharpener\nUpgrade Level " + str(warriorUpgrade1Level) + "\n+10%% damage per warrior with each upgrade\nCost: " + str(_number_conversion(int(warriorUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/WarriorUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Buy in Bulk\nUpgrade Level " + str(warriorUpgrade2Level) + "\n-2%% Warrior cost, -1%% Warrior Upgrade cost per level\nCost: %.2f" % warriorUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Buy in Bulk\nUpgrade Level " + str(warriorUpgrade2Level) + "\n-2%% Warrior cost, -1%% Warrior Upgrade cost per level\nCost: " + str(_number_conversion(int(warriorUpgrade2Cost)))
 		# archer upgrades
 	if $UpgradeContainer/GridContainer/ArcherUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Obsidian Tips\nUpgrade Level " + str(archerUpgrade1Level) + "\n+25%% damage per archer with each upgrade\nCost: %.2f" % archerUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Obsidian Tips\nUpgrade Level " + str(archerUpgrade1Level) + "\n+25%% damage per archer with each upgrade\nCost: " + str(_number_conversion(int(archerUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/ArcherUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Cover Fire\nUpgrade Level " + str(archerUpgrade2Level) + "\n+5%% total damage per upgrade (not shown on units)\nCost: %.2f" % archerUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Cover Fire\nUpgrade Level " + str(archerUpgrade2Level) + "\n+5%% total damage per upgrade (not shown on units)\nCost: " + str(_number_conversion(int(archerUpgrade2Cost)))
 		# mage upgrades
 	if $UpgradeContainer/GridContainer/MageUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Dragoncore Wands\nUpgrade Level " + str(mageUpgrade1Level) + "\n+30%% mage damage per upgrade\nCost: %.2f" % mageUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Dragoncore Wands\nUpgrade Level " + str(mageUpgrade1Level) + "\n+30%% mage damage per upgrade\nCost: " + str(_number_conversion(int(mageUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/MageUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Rust Armor\nUpgrade Level " + str(mageUpgrade2Level) + "\n-1.5%% max monster HP, and +1.5%% DPS for warriors and archers\nCost: %.2f" % mageUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Rust Armor\nUpgrade Level " + str(mageUpgrade2Level) + "\n-1.5%% max monster HP, and +1.5%% DPS for warriors and archers\nCost: " + str(_number_conversion(int(mageUpgrade2Cost)))
 		# demo upgrades
 	if $UpgradeContainer/GridContainer/DemoUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Bombastic Kerplosions\nUpgrade Level " + str(demoUpgrade1Level) + "\n+35%% demo damage per upgrade\nCost: %.2f" % demoUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Bombastic Kerplosions\nUpgrade Level " + str(demoUpgrade1Level) + "\n+35%% demo damage per upgrade\nCost: " + str(_number_conversion(int(demoUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/DemoUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Fire Under the Ass\nUpgrade Level " + str(demoUpgrade2Level) + "\n2.5%% faster attacks (tick speed)\nCost: %.2f" % demoUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Fire Under the Ass\nUpgrade Level " + str(demoUpgrade2Level) + "\n2.5%% faster attacks (tick speed)\nCost: " + str(_number_conversion(int(demoUpgrade2Cost)))
 		# cleric upgrades
 	if $UpgradeContainer/GridContainer/ClericUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Healing\nUpgrade Level " + str(clericUpgrade1Level) + "\nHeal your heroes, giving them +20%% more time to attack\nCost: %.2f" % clericUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Healing\nUpgrade Level " + str(clericUpgrade1Level) + "\nHeal your heroes, giving them +20%% more time to attack\nCost: " + str(_number_conversion(int(clericUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/ClericUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Bless\nUpgrade Level " + str(clericUpgrade2Level) + "\n25%% more DPS per hero level, per upgrade level, for warriors, archers, mages, and demos.\nCost: %.2f" % clericUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Bless\nUpgrade Level " + str(clericUpgrade2Level) + "\n25%% more DPS per hero level, per upgrade level, for warriors, archers, mages, and demos.\nCost: " + str(_number_conversion(int(clericUpgrade2Cost)))
 		# beastmaster upgrades
 	if $UpgradeContainer/GridContainer/BeastmasterUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Thrill of the Hunt\nUpgrade Level " + str(beastmasterUpgrade1Level) + "\nThe Beastmaster fuels your party with adrenaline. +1%% faster attacks (tick speed) and +5%% beastmaster DPS.\nCost: %.2f" % beastmasterUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Thrill of the Hunt\nUpgrade Level " + str(beastmasterUpgrade1Level) + "\nThe Beastmaster fuels your party with adrenaline. +1%% faster attacks (tick speed) and +5%% beastmaster DPS.\nCost: " + str(_number_conversion(int(beastmasterUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/BeastmasterUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Assemble the Horde\nUpgrade Level " + str(beastmasterUpgrade2Level) + "\nA call to arms accompanied by hawk screeching inspires troops to join. -1%% cost for all units per level.\nCost: %.2f" % beastmasterUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Assemble the Horde\nUpgrade Level " + str(beastmasterUpgrade2Level) + "\nA call to arms accompanied by hawk screeching inspires troops to join. -1%% cost for all units per level.\nCost: " + str(_number_conversion(int(beastmasterUpgrade2Cost)))
 		# draconic sorcerer upgrades
 	if $UpgradeContainer/GridContainer/DraconicSorcererUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Wild Magic\nUpgrade Level " + str (draconicSorcererUpgrade1Level) + "\nImprove the wild magic that turns monster corpses into currency! Base gold from monsters is now multiplied 1x to " + str(3 + draconicSorcererUpgrade1Level) + "x (Normally 1x - 3x).\nCost: %.2f" % draconicSorcererUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Wild Magic\nUpgrade Level " + str (draconicSorcererUpgrade1Level) + "\nImprove the wild magic that turns monster corpses into currency! Base gold from monsters is now multiplied 1x to " + str(3 + draconicSorcererUpgrade1Level) + "x (Normally 1x - 3x).\nCost: " +  str(_number_conversion(int(draconicSorcererUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/DraconicSorcererUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Dragonfire Enchantment\nUpgrade Level " + str(draconicSorcererUpgrade2Level) + "\nRed scales grow across the sorcerer's skin. +10%% Draconic Sorcerrer DPS and +5%% DPS for all other units per level.\nCost: %.2f" % draconicSorcererUpgrade2Cost 
+		$TempDescrBox/TempDescrBox.text = "Dragonfire Enchantment\nUpgrade Level " + str(draconicSorcererUpgrade2Level) + "\nRed scales grow across the sorcerer's skin. +10%% Draconic Sorcerrer DPS and +5%% DPS for all other units per level.\nCost: " +  str(_number_conversion(int(draconicSorcererUpgrade2Cost)))
 		# changeling upgrades
 	if $UpgradeContainer/GridContainer/ChangelingUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Improvise, Adapt, Overcome\nUpgrade Level " + str(changelingUpgrade1Level) + "\nChanging into the monsters helps the changelings learn their weaknesses -2%% Max Monster HP per level.\nCost: %.2f" % changelingUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Improvise, Adapt, Overcome\nUpgrade Level " + str(changelingUpgrade1Level) + "\nChanging into the monsters helps the changelings learn their weaknesses -2%% Max Monster HP per level.\nCost: " + str(_number_conversion(int(changelingUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/ChangelingUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Strange Shape\nUpgrade Level " + str(changelingUpgrade2Level) + "\nThe changelings become part of each unit. All units cost -.1%% per upgrade level and get +.1%% DPS per warrior, archer, mage, demo, cleric, beastmaster, and draconic sorcerer, per upgrade level.\nTotal +/-: %.3f" % ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + "\nCost: %.2f" % changelingUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Strange Shape\nUpgrade Level " + str(changelingUpgrade2Level) + "\nThe changelings become part of each unit. All units cost -.1%% per upgrade level and get +.1%% DPS per warrior, archer, mage, demo, cleric, beastmaster, and draconic sorcerer, per upgrade level.\nTotal +/-: %.3f" % ((.001 * (warriorLevel + archerLevel + mageLevel + demoLevel + clericLevel + beastmasterLevel + draconicSorcererLevel)) * changelingUpgrade2Level) + "\nCost: " + str(_number_conversion(int(changelingUpgrade2Cost)))
 		# monarch upgrades
 	if $UpgradeContainer/GridContainer/MonarchUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Divine Sight\nUpgrade Level " + str(monarchUpgrade1Level) + "\nAnnointed to lead by divinity, the monarch increases total DPS by 1%% per upgrade level. Also allows units to ascend!\nCost: %.2f" % monarchUpgrade1Cost
+		$TempDescrBox/TempDescrBox.text = "Divine Sight\nUpgrade Level " + str(monarchUpgrade1Level) + "\nAnnointed to lead by divinity, the monarch increases total DPS by 1%% per upgrade level. Also allows units to ascend!\nCost: " + str(_number_conversion(int( monarchUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/MonarchUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Arm Your Forces\nUpgrade Level " + str(monarchUpgrade2Level) + "\nThe Monarch leads his army effectively. +1 level for all units (except the monarch) per upgrade level.\nCost: %.2f" % monarchUpgrade2Cost
+		$TempDescrBox/TempDescrBox.text = "Arm Your Forces\nUpgrade Level " + str(monarchUpgrade2Level) + "\nThe Monarch leads his army effectively. +1 level for all units (except the monarch) per upgrade level.\nCost: " + str(_number_conversion(int(monarchUpgrade2Cost)))
 	
 # Unit button and upgrades
 
@@ -823,13 +823,12 @@ func _on_prestige_bonus_3_pressed() -> void:	# Permanent click power increase
 		
 # number conversion function
 # If number is over 'x' digits long, make an exponent and divide the number down
-# How do I make it revert when number goes down?
 func _number_conversion(number):
-	var exponent = len(str(number - 2))
-	if len(str(number)) <= 6:
+	var exponent = len(str(int(number - 1)))
+	if exponent <= 6:
 		return(number)
-	if len(str(number)) > 6:
-		number = number / float(10 ** exponent - 1)
+	if exponent > 6:
+		number = number / float(10 ** exponent)
 		if number < 1:
 			number *= 10
 			exponent -= 1
