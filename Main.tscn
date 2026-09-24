@@ -19,6 +19,15 @@
 [ext_resource type="Texture2D" uid="uid://dwt0hfpekuw4c" path="res://UISprites/DescrFrames.png" id="14_c2ibq"]
 [ext_resource type="Texture2D" uid="uid://bguawulht7tks" path="res://CharacterSprites/ChanglingCharacter.png" id="14_devvj"]
 [ext_resource type="Texture2D" uid="uid://bt4mjp7421kvn" path="res://CharacterSprites/MonarchCharacter.png" id="15_3b0ty"]
+[ext_resource type="Texture2D" uid="uid://dh1jalxchvacu" path="res://UpgradeSprites/ClickUpgrade1Button.png" id="16_2gh4u"]
+[ext_resource type="Texture2D" uid="uid://bfxfuvuoa15wr" path="res://UpgradeSprites/ClickUpgrade2Button.png" id="17_devvj"]
+[ext_resource type="Texture2D" uid="uid://2nri8do05yc0" path="res://UpgradeSprites/WarriorUpgrade1Button.png" id="18_hri7i"]
+[ext_resource type="Texture2D" uid="uid://uddlg864fepv" path="res://UpgradeSprites/WarriorUpgrade2Button.png" id="19_w3rk5"]
+[ext_resource type="Texture2D" uid="uid://h7i0egoc68tt" path="res://UpgradeSprites/MageUpgrade1Button.png" id="21_5mvff"]
+[ext_resource type="Texture2D" uid="uid://cjjf0eotit2hg" path="res://UpgradeSprites/MageUpgrade2Button.png" id="22_oye8v"]
+[ext_resource type="Texture2D" uid="uid://b4bysacdpg3rg" path="res://UpgradeSprites/DemoUpgrade1Button.png" id="23_40n85"]
+[ext_resource type="Texture2D" uid="uid://dpqr6yhrxufo3" path="res://UpgradeSprites/ClericUpgrade2Button.png" id="24_gb15f"]
+[ext_resource type="Texture2D" uid="uid://vvutdvfqsjqy" path="res://UpgradeSprites/MonarchUpgrade1Button.png" id="25_sph85"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_c6i3y"]
 
@@ -532,38 +541,33 @@ columns = 3
 
 [node name="ClickUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1483564781]
 layout_mode = 2
-text = "Click 1"
-icon = ExtResource("3_03owx")
+icon = ExtResource("16_2gh4u")
 flat = true
 icon_alignment = 1
 
 [node name="ClickUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1622511192]
 layout_mode = 2
-text = "Click 2"
-icon = ExtResource("3_03owx")
+icon = ExtResource("17_devvj")
 flat = true
 icon_alignment = 1
 
 [node name="WarriorUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=561779370]
 visible = false
 layout_mode = 2
-text = "Warrior 1"
-icon = ExtResource("3_03owx")
+icon = ExtResource("18_hri7i")
 flat = true
 icon_alignment = 1
 
 [node name="WarriorUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1872191041]
 visible = false
 layout_mode = 2
-text = "Warrior 2"
-icon = ExtResource("3_03owx")
+icon = ExtResource("19_w3rk5")
 flat = true
 icon_alignment = 1
 
 [node name="ArcherUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1449867786]
 visible = false
 layout_mode = 2
-text = "Archer 1"
 icon = ExtResource("12_fpfj3")
 flat = true
 icon_alignment = 1
@@ -579,24 +583,21 @@ icon_alignment = 1
 [node name="MageUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=81135175]
 visible = false
 layout_mode = 2
-text = "Mage 1"
-icon = ExtResource("3_03owx")
+icon = ExtResource("21_5mvff")
 flat = true
 icon_alignment = 1
 
 [node name="MageUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1826171352]
 visible = false
 layout_mode = 2
-text = "Mage 2"
-icon = ExtResource("3_03owx")
+icon = ExtResource("22_oye8v")
 flat = true
 icon_alignment = 1
 
 [node name="DemoUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=590281759]
 visible = false
 layout_mode = 2
-text = "Demo 1"
-icon = ExtResource("3_03owx")
+icon = ExtResource("23_40n85")
 flat = true
 icon_alignment = 1
 
@@ -619,8 +620,7 @@ icon_alignment = 1
 [node name="ClericUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1090393198]
 visible = false
 layout_mode = 2
-text = "Cleric 2"
-icon = ExtResource("3_03owx")
+icon = ExtResource("24_gb15f")
 flat = true
 icon_alignment = 1
 
@@ -675,8 +675,7 @@ icon_alignment = 1
 [node name="MonarchUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=815260949]
 visible = false
 layout_mode = 2
-text = "Monarch 1"
-icon = ExtResource("3_03owx")
+icon = ExtResource("25_sph85")
 flat = true
 icon_alignment = 1
 

@@ -3,6 +3,8 @@ extends TextureRect
 @export var gold: int = 0
 var lifetimeGold = 0
 var tempGold
+var timeOnQuit = 0
+var timeOnLoad
 
 @export var prestigeGold = 0
 var prestigeGoldGain = len(str(gold)) - 6
@@ -183,6 +185,10 @@ var HPResetMax = 300 + (.25 * clericUpgrade1Level) # iterated in delta process, 
 
 
 func _ready():
+	
+	timeOnLoad = Time.get_unix_time_from_system()
+	var timeDiff = (timeOnLoad - timeOnQuit)
+	print("It has been " + str(timeDiff) + " seconds since last play")
 	
 	var timer = Timer.new()
 	timer.autostart = true
@@ -716,8 +722,7 @@ func _on_last_monster_button_pressed() -> void:
 		_monster_stat_update(x)
 		monsterHPReset = 0
 	else:
-		gold *= 10		# DEBUG
-		lifetimeGold *= 10 	# DEBUG
+		gold *= 100		# DEBUG
 		print(prestigeGoldGain)
 		print("Fail son")
 
@@ -838,10 +843,14 @@ func _number_conversion(number):
 func _save_game():
 	var save_file = FileAccess.open("res://savegame.save", FileAccess.WRITE)
 
+	timeOnQuit = Time.get_unix_time_from_system()
+
 	var save_dict = {
 		
 			"filename" : get_scene_file_path(),
 			"parent" : get_parent().get_path(),
+			
+			"timeOnQuit" : timeOnQuit,
 			
 			"gold" : gold,
 			"lifetimeGold" : lifetimeGold,
@@ -996,6 +1005,7 @@ func _load_game():
 
 func _save_game_reset():
 	# Confirmation message first, then...
+	timeOnQuit = 0
 	# Reset variables to base state ('0' or OG formula)
 	gold = 0
 	lifetimeGold = 0
@@ -1139,7 +1149,6 @@ func _on_ready() -> void:
 # Mostly Implemented
 # Scope of function: Update costs of generators, upgrades, and prestige
 # by feeding in variable
-# TO-DO: new _dps_update function to update DPS values in the same way
 func _costs_update(cost):
 # Prestige bonus costs
 	if cost == prestigeBonus1Cost:
