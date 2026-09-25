@@ -4,7 +4,7 @@ extends TextureRect
 var lifetimeGold = 0
 var tempGold
 var timeOnQuit = 0
-var timeOnLoad
+var timeOnLoad = 0
 
 @export var prestigeGold = 0
 var prestigeGoldGain = len(str(gold)) - 6
@@ -258,6 +258,8 @@ var monsterNames = {
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	timeOnQuit = Time.get_unix_time_from_system()
 	
 	# Reset monster's HP after ~5 sec (300 units in delta time)
 	if monsterHP < monsterHPMax:
@@ -843,8 +845,6 @@ func _number_conversion(number):
 func _save_game():
 	var save_file = FileAccess.open("res://savegame.save", FileAccess.WRITE)
 
-	timeOnQuit = Time.get_unix_time_from_system()
-
 	var save_dict = {
 		
 			"filename" : get_scene_file_path(),
@@ -977,6 +977,7 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("Quit detected")
 		_save_game()
+		print(timeOnQuit)
 		# track time quit here, in load game, track time then, subtract, provide player with offline gains
 		get_tree().quit() # default behavior
 
@@ -1000,7 +1001,7 @@ func _load_game():
 		
 		for i in save_data.keys():
 			if i != "parent" && i != "filename":
-				print(i + ":" + str(save_data[i]))
+				#print(i + ":" + str(save_data[i]))
 				set(i, save_data[i])
 
 func _save_game_reset():
@@ -1144,6 +1145,8 @@ func _on_test_button_pressed() -> void:
 
 
 func _on_ready() -> void:
+	print(timeOnQuit)
+	print(timeOnLoad)
 	_load_game()
 	
 # Mostly Implemented
