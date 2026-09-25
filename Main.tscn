@@ -40,8 +40,6 @@ offset_bottom = 720.0
 texture = ExtResource("1_c6i3y")
 expand_mode = 2
 script = ExtResource("1_uu6xs")
-gold = 99999999999
-warriorLevel = 75
 
 [node name="MonsterButton" type="Button" parent="." unique_id=1448257603]
 layout_mode = 1
