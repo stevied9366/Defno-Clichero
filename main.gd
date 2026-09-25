@@ -3,8 +3,8 @@ extends TextureRect
 @export var gold: int = 0
 var lifetimeGold = 0
 var tempGold
-var timeOnQuit = 0
-var timeOnLoad = 0
+var timeOnQuit
+var timeOnLoad
 
 @export var prestigeGold = 0
 var prestigeGoldGain = len(str(gold)) - 6
@@ -40,6 +40,7 @@ var prestigeGoldGain = len(str(gold)) - 6
 			# First bonus increases TotalDPS and reduces cost of generators (not upgrades)
 			# Second bonus increases/decreases a specific stat
 		
+# Have timeDiff variable actually give gold based on DPS and MonsterFrame
 # Stop/Start unit attacks
 # Some monsters are strong against some units
 # Elemental type damage, being able to change it
@@ -73,7 +74,7 @@ var monarchLevel = 0
 
 # upgrade levels
 var warriorUpgrade1Level = 0
-var warriorUpgrade2Level = 0
+var warriorUpgrade2Level = 0; var warriorUpgrade2LevelMax = 25
 var archerUpgrade1Level = 0
 var archerUpgrade2Level = 0
 var mageUpgrade1Level = 0
@@ -186,10 +187,6 @@ var HPResetMax = 300 + (.25 * clericUpgrade1Level) # iterated in delta process, 
 
 func _ready():
 	
-	timeOnLoad = Time.get_unix_time_from_system()
-	var timeDiff = (timeOnLoad - timeOnQuit)
-	print("It has been " + str(timeDiff) + " seconds since last play")
-	
 	var timer = Timer.new()
 	timer.autostart = true
 	timer.wait_time = tickSpeed
@@ -259,8 +256,6 @@ var monsterNames = {
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	timeOnQuit = Time.get_unix_time_from_system()
-	
 	# Reset monster's HP after ~5 sec (300 units in delta time)
 	if monsterHP < monsterHPMax:
 		monsterHPReset += 1
@@ -279,6 +274,12 @@ func _process(delta: float) -> void:
 
 	# TEST if cost upgrade func can be constantly run (looks like its fine... see how it is when adding the other costs)
 	_costs_update(warriorCost)
+
+	# Set Warrior Upgrade 2 transparent after reaching max level
+	if warriorUpgrade2Level < 25:
+		$UpgradeContainer/GridContainer/WarriorUpgrade2.modulate = Color(1, 1, 1, 1)
+	if warriorUpgrade2Level >= 25:
+		$UpgradeContainer/GridContainer/WarriorUpgrade2.modulate = Color(1, 1, 1, 0.5)
 
 	# Flags to make generators and upgrades appear
 	if warriorLevel >= 1:
@@ -401,7 +402,7 @@ func _process(delta: float) -> void:
 	if $UpgradeContainer/GridContainer/WarriorUpgrade1.is_hovered() == true:
 		$TempDescrBox/TempDescrBox.text = "Sword Sharpener\nUpgrade Level " + str(warriorUpgrade1Level) + "\n+10%% damage per warrior with each upgrade\nCost: " + str(_number_conversion(int(warriorUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/WarriorUpgrade2.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Buy in Bulk\nUpgrade Level " + str(warriorUpgrade2Level) + "\n-2%% Warrior cost, -1%% Warrior Upgrade cost per level\nCost: " + str(_number_conversion(int(warriorUpgrade2Cost)))
+		$TempDescrBox/TempDescrBox.text = "Buy in Bulk\nUpgrade Level " + str(warriorUpgrade2Level) + "\n-2%% Warrior cost, -1%% Warrior Upgrade cost per level. Max Level = 25\nCost: " + str(_number_conversion(int(warriorUpgrade2Cost)))
 		# archer upgrades
 	if $UpgradeContainer/GridContainer/ArcherUpgrade1.is_hovered() == true:
 		$TempDescrBox/TempDescrBox.text = "Obsidian Tips\nUpgrade Level " + str(archerUpgrade1Level) + "\n+25%% damage per archer with each upgrade\nCost: " + str(_number_conversion(int(archerUpgrade1Cost)))
@@ -461,12 +462,15 @@ func _on_warrior_upgrade_1_pressed() -> void:	# Increases warrior DPS
 		_dps_update(warriorTotalDPS)
 
 func _on_warrior_upgrade_2_pressed() -> void:	# Decreases cost of warriors and warrior upgrades
-	if gold >= warriorUpgrade2Cost:
-		gold -= warriorUpgrade2Cost
-		warriorUpgrade2Level += 1
-		_costs_update(warriorCost)
-		_costs_update(warriorUpgrade1Cost)
-		_costs_update(warriorUpgrade2Cost)
+	if warriorUpgrade2Level < 25:
+		if gold >= warriorUpgrade2Cost:
+			gold -= warriorUpgrade2Cost
+			warriorUpgrade2Level += 1
+			_costs_update(warriorCost)
+			_costs_update(warriorUpgrade1Cost)
+			_costs_update(warriorUpgrade2Cost)
+	if warriorUpgrade2Level >= 25:
+		print("Max Level!")
 		
 	# Archer button and upgrades
 
@@ -850,7 +854,7 @@ func _save_game():
 			"filename" : get_scene_file_path(),
 			"parent" : get_parent().get_path(),
 			
-			"timeOnQuit" : timeOnQuit,
+			"timeOnQuit" : Time.get_unix_time_from_system(),
 			
 			"gold" : gold,
 			"lifetimeGold" : lifetimeGold,
@@ -977,7 +981,7 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("Quit detected")
 		_save_game()
-		print(timeOnQuit)
+		print("ToQ: " + str(timeOnQuit))
 		# track time quit here, in load game, track time then, subtract, provide player with offline gains
 		get_tree().quit() # default behavior
 
@@ -1145,9 +1149,12 @@ func _on_test_button_pressed() -> void:
 
 
 func _on_ready() -> void:
-	print(timeOnQuit)
-	print(timeOnLoad)
 	_load_game()
+	print("ToQ: " + str(timeOnQuit))
+	timeOnLoad = Time.get_unix_time_from_system()
+	print("ToL: " + str(timeOnLoad))
+	var timeDiff = (timeOnLoad - timeOnQuit)
+	print("It has been " + str(timeDiff) + " seconds since last play")
 	
 # Mostly Implemented
 # Scope of function: Update costs of generators, upgrades, and prestige
