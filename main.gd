@@ -6,9 +6,6 @@ var tempGold
 var timeOnQuit
 var timeOnLoad
 
-var prestigeGold = 0
-var prestigeGoldGain = len(str(gold)) - 6
-
 # Monster in the middle to click
 # Clicking hurts monster. Killing monster makes gold
 # Heroes can be hired to auto hit the monster, generating more damage
@@ -27,9 +24,9 @@ var prestigeGoldGain = len(str(gold)) - 6
 	
 # Unit prestiging
 	# Unit prestiging unlocked via Monarch
-	# Prestige bonus for every 25 units
-	# Prestiging units gives DPS/Cost bonuses
-	# Prestige bonus increases TotalDPS and reduces cost of generators (not upgrades)
+	# Prestige bonus for every 25 units (minimum level 25), sets unit level to 0
+	# Prestige bonus increases TotalDPS and reduces cost of generators (not upgrades) (+ .01% DPS, - .01% Upgrade cost per unit ascended)
+	# Points count for Prestige (+1 Prestige point per unit ascension point) (prestige resets ascension too)
 
 # TO-DO:
 # Lock monsters behind different requirements (DPS, kill count, etc.)
@@ -100,6 +97,12 @@ var beastmasterAscendPoints = 0
 var draconicSorcererAscendPoints = 0
 var changelingAscendPoints = 0
 var monarchAscendPoints = 0
+
+var prestigeGold = 0
+var prestigeGoldGain = (len(str(gold)) - 6) + \
+	warriorAscendPoints + archerAscendPoints + mageAscendPoints + demoAscendPoints + \
+	clericAscendPoints + beastmasterAscendPoints + draconicSorcererAscendPoints + \
+	changelingAscendPoints + monarchAscendPoints
 
 # generator costs
 var warriorCost = \
@@ -196,6 +199,7 @@ func _ready():
 	print("ToL: " + str(timeOnLoad))
 	var timeDiff = (timeOnLoad - timeOnQuit)
 	print("It has been " + str(timeDiff) + " seconds since last play")
+	#func blahblah(timeDIff) (pass timeDiff into function to calculate offline gold)
 	
 	var timer = Timer.new()
 	timer.autostart = true
@@ -215,17 +219,14 @@ func _ready():
 				tempGold = floori((randi_range(1,(3 + draconicSorcererUpgrade1Level)) * monsterGold) * (1 + .01 * prestigeBonus1Level))
 				gold += tempGold
 				lifetimeGold += tempGold
-				$MonsterButton/GoldGainedLabel.text = str(tempGold) + " gold!"
-				
-				print("Di Bugg: GoldGained: " + str(tempGold))
+				$MonsterButton/GoldGainedLabel.text = str(int(tempGold)) + " gold!"
 		# Upgrade if statement here...
 		if totalDPS >= monsterHPMax:
 			var l = floor(totalDPS/monsterHPMax)
 			tempGold = (randi_range(1,(3 + draconicSorcererUpgrade1Level)) * monsterGold) * (1 + .01 * prestigeBonus1Level) * l
 			gold += tempGold
 			lifetimeGold += tempGold
-			$MonsterButton/GoldGainedLabel.text = str(tempGold) + " gold!"
-			print("Debug: OVERKILL!!!! By a multiple of... " + str(l))
+			$MonsterButton/GoldGainedLabel.text = str(int(tempGold)) + " gold!"
 	
 		)
 
@@ -290,11 +291,16 @@ func _process(delta: float) -> void:
 			monsterHPReset = 0
 			monsterHP = monsterHPMax
 
-	$UnitLabel.text = \
-		"Gold: " + str(_number_conversion(int(gold))) + "\nDEBUG Full Gold: " + str(gold) + \
-		"\nLifetime Gold: " + str(_number_conversion(lifetimeGold)) + \
-		"   Gold Prestige: " + str(prestigeGold) + \
-		"\nTotal DPS: " + str((warriorTotalDPS + archerTotalDPS + mageTotalDPS + demoTotalDPS + clericTotalDPS + beastmasterTotalDPS + draconicSorcererTotalDPS + changelingTotalDPS + monarchTotalDPS) * (1 +  .05 * archerUpgrade2Level) * (1 + .1 * monarchUpgrade1Level))
+	if prestigeGoldGain < 1 or prestigeGold < 1:
+		$UnitLabel.text = \
+			"Gold: " + str(_number_conversion(int(gold))) + \
+			"\nTotal DPS: " + str((warriorTotalDPS + archerTotalDPS + mageTotalDPS + demoTotalDPS + clericTotalDPS + beastmasterTotalDPS + draconicSorcererTotalDPS + changelingTotalDPS + monarchTotalDPS) * (1 +  .05 * archerUpgrade2Level) * (1 + .1 * monarchUpgrade1Level))
+	if prestigeGoldGain >= 1 or prestigeGold >= 1:
+		$UnitLabel.text = \
+			"Gold: " + str(_number_conversion(int(gold))) + \
+			"\nPrestige Gold: " + str(prestigeGold) + \
+			"\nTotal DPS: " + str((warriorTotalDPS + archerTotalDPS + mageTotalDPS + demoTotalDPS + clericTotalDPS + beastmasterTotalDPS + draconicSorcererTotalDPS + changelingTotalDPS + monarchTotalDPS) * (1 +  .05 * archerUpgrade2Level) * (1 + .1 * monarchUpgrade1Level))
+	
 	$MonsterLabel.text = \
 		"Monster Name: " + monsterNames[monsterDic[str(monsterFrame)]] + \
 		"\nMonster HP: " + str(monsterHP) + " // " + str(monsterHPMax)
@@ -350,7 +356,11 @@ func _process(delta: float) -> void:
 		_ascension_buttons()
 	
 	# Gold prestige based on how many digits of gold
-	prestigeGoldGain = len(str(gold)) - 6
+	prestigeGoldGain = (len(str(gold)) - 6) + \
+	warriorAscendPoints + archerAscendPoints + mageAscendPoints + demoAscendPoints + \
+	clericAscendPoints + beastmasterAscendPoints + draconicSorcererAscendPoints + \
+	changelingAscendPoints + monarchAscendPoints
+
 
 	if prestigeGoldGain >= 1:
 		$GoldPrestigeLabel.visible = true
@@ -457,7 +467,7 @@ func _process(delta: float) -> void:
 		$TempDescrBox/TempDescrBox.text = "Assemble the Horde\nUpgrade Level " + str(int(beastmasterUpgrade2Level)) + "\nA call to arms accompanied by hawk screeching inspires troops to join. -1%% cost for all units per level.\nCost: " + str(_number_conversion(int(beastmasterUpgrade2Cost)))
 		# draconic sorcerer upgrades
 	if $UpgradeContainer/GridContainer/DraconicSorcererUpgrade1.is_hovered() == true:
-		$TempDescrBox/TempDescrBox.text = "Wild Magic\nUpgrade Level " + str(int(draconicSorcererUpgrade1Level)) + "\nImprove the wild magic that turns monster corpses into currency! Base gold from monsters is now multiplied 1x to " + str(3 + draconicSorcererUpgrade1Level) + "x (Normally 1x - 3x).\nCost: " +  str(_number_conversion(int(draconicSorcererUpgrade1Cost)))
+		$TempDescrBox/TempDescrBox.text = "Wild Magic\nUpgrade Level " + str(int(draconicSorcererUpgrade1Level)) + "\nImprove the wild magic that turns monster corpses into currency! Base gold from monsters is now multiplied 1x to " + str(int(3 + draconicSorcererUpgrade1Level)) + "x (Normally 1x - 3x).\nCost: " +  str(_number_conversion(int(draconicSorcererUpgrade1Cost)))
 	if $UpgradeContainer/GridContainer/DraconicSorcererUpgrade2.is_hovered() == true:
 		$TempDescrBox/TempDescrBox.text = "Dragonfire Enchantment\nUpgrade Level " + str(int(draconicSorcererUpgrade2Level)) + "\nRed scales grow across the sorcerer's skin. +10%% Draconic Sorcerrer DPS and +5%% DPS for all other units per level.\nCost: " +  str(_number_conversion(int(draconicSorcererUpgrade2Cost)))
 		# changeling upgrades
@@ -528,7 +538,6 @@ func _on_mage_button_pressed() -> void:
 		mageLevel += 1
 		_generator_purchase()
 		
-
 func _on_mage_upgrade_1_pressed() -> void:	# Increases mage DPS
 	if gold >= mageUpgrade1Cost:
 		gold -= mageUpgrade1Cost
@@ -862,6 +871,9 @@ func _on_prestige_bonus_3_pressed() -> void:	# Permanent click power increase
 # number conversion function
 # If number is over 'x' digits long, make an exponent and divide the number down
 func _number_conversion(number):
+	if number >= 9223372036854775806:	# doesn't work, good try lol
+		return("Too Much!")
+		pass
 	var exponent = len(str(int(number - 1)))
 	if exponent <= 6:
 		return(number)
@@ -1393,21 +1405,8 @@ func _hide_units_and_upgrades():
 	$UpgradeContainer/GridContainer/ChangelingUpgrade2.hide()
 	$UpgradeContainer/GridContainer/MonarchUpgrade1.hide()
 	$UpgradeContainer/GridContainer/MonarchUpgrade2.hide()
-# github.com/ChronoDK/GodotBigNumberClass
 
-#   |_|_| 
-# q 0 ~ 0 p 
-#  -|s d|-
-#   |---|
-
-# ascension functions
-# 25+ unit levels to ascend, sets unit level to 0
-# Grants ascension points per 25 levels of unit
-# increase DPS, reduce upgrade cost (NOT generator cost) for specific units
-#	+ .01% DPS per unit ascended
-#	- .01% Upgrade cost per unit ascended
-# Points count for Prestige (+1 Prestige point per unit ascension point) (prestige now resets ascension too)
-
+# Ascension functions
 
 func _on_warrior_prestige_button_pressed() -> void:
 	if warriorLevel >= 25:
@@ -1481,4 +1480,9 @@ func _on_monarch_prestige_button_pressed() -> void:
 		_dps_update(monarchTotalDPS)
 		print(str(monarchAscendPoints) + " monarch ascend points.")
 
-# Test comment for github 3
+# github.com/ChronoDK/GodotBigNumberClass
+
+#   |_|_| 
+# q 0 ~ 0 p 
+#  -|s d|-
+#   |---|
