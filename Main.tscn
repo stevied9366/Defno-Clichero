@@ -24,9 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://2nri8do05yc0" path="res://UpgradeSprites/WarriorUpgrade1Button.png" id="18_hri7i"]
 [ext_resource type="Texture2D" uid="uid://uddlg864fepv" path="res://UpgradeSprites/WarriorUpgrade2Button.png" id="19_w3rk5"]
 [ext_resource type="Texture2D" uid="uid://h7i0egoc68tt" path="res://UpgradeSprites/MageUpgrade1Button.png" id="21_5mvff"]
+[ext_resource type="Texture2D" uid="uid://bjhrex0riiw54" path="res://UpgradeSprites/ArcherUpgrade2Button.png" id="21_oye8v"]
 [ext_resource type="Texture2D" uid="uid://cjjf0eotit2hg" path="res://UpgradeSprites/MageUpgrade2Button.png" id="22_oye8v"]
 [ext_resource type="Texture2D" uid="uid://b4bysacdpg3rg" path="res://UpgradeSprites/DemoUpgrade1Button.png" id="23_40n85"]
 [ext_resource type="Texture2D" uid="uid://dpqr6yhrxufo3" path="res://UpgradeSprites/ClericUpgrade2Button.png" id="24_gb15f"]
+[ext_resource type="Texture2D" uid="uid://bqi0al2bocqjr" path="res://UpgradeSprites/ClericUpgrade1Button.png" id="25_40n85"]
 [ext_resource type="Texture2D" uid="uid://vvutdvfqsjqy" path="res://UpgradeSprites/MonarchUpgrade1Button.png" id="25_sph85"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_c6i3y"]
@@ -573,8 +575,7 @@ icon_alignment = 1
 [node name="ArcherUpgrade2" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1823637006]
 visible = false
 layout_mode = 2
-text = "Archer 2"
-icon = ExtResource("3_03owx")
+icon = ExtResource("21_oye8v")
 flat = true
 icon_alignment = 1
 
@@ -610,8 +611,7 @@ icon_alignment = 1
 [node name="ClericUpgrade1" type="Button" parent="UpgradeContainer/GridContainer" unique_id=1459337158]
 visible = false
 layout_mode = 2
-text = "Cleric 1"
-icon = ExtResource("3_03owx")
+icon = ExtResource("25_40n85")
 flat = true
 icon_alignment = 1
 
@@ -756,8 +756,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -8.0
+offset_right = 9.5
 grow_horizontal = 2
 grow_vertical = 2
+flat = true
+icon_alignment = 1
 
 [node name="PrestigeBonuses" type="Button" parent="." unique_id=155004170]
 layout_mode = 0
@@ -852,6 +856,22 @@ offset_bottom = 201.0
 text = "Full
 Reset
 Button"
+
+[node name="MonsterKillcountLabel" type="RichTextLabel" parent="." unique_id=986553597]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -98.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Kills Remaining: X"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="MonsterButton" to="." method="_on_monster_button_pressed"]
