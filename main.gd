@@ -32,6 +32,10 @@ var timeOnLoad
 # Lock monsters behind different requirements (DPS, kill count, etc.)
 #	Variable that counts kills, resets after reaching it
 #	Variable tracking what monster player reached, ensuring map doesnt need to be unlocked
+# Upgrade for each unit, shown as a bar
+#	Each unit has a unique stat that increases with the upgrade
+#	9 stats:
+#		monsterGold Multi, totalDPS, tickSpeed, monsterKillCount multi, generator/upgrade costs, x, y, z (tbd)
 # Have timeDiff variable actually give gold based on DPS and MonsterFrame
 # Unit prestige Bonuses for each iteration of 25 (25 = 1, 50 = 3, 75 = 6, etc)
 # Display units fighting monster (# displayed depends on number of digits of generator level (1 = 1 displayed, 10 = 2 displayed, 100 = 3 displayed, etc
@@ -232,7 +236,7 @@ func _ready():
 					monsterKillcount -= 1
 					if monsterKillcount == 0:
 						monsterMap += 1
-						monsterKillcount += (5 + monsterMap)
+						monsterKillcount += (10 * monsterMap)
 				monsterHP = monsterHPMax
 				monsterHPReset = 0
 				tempGold = floori((randi_range(1,(3 + draconicSorcererUpgrade1Level)) * monsterGold) * (1 + .01 * prestigeBonus1Level))
@@ -245,7 +249,7 @@ func _ready():
 					monsterKillcount -= 1
 					if monsterKillcount == 0:
 						monsterMap += 1
-						monsterKillcount += (5 + monsterMap)
+						monsterKillcount += (10 * monsterMap)
 			monsterHP = monsterHPMax
 			monsterHPReset = 0
 			var l = floor(totalDPS/monsterHPMax)
@@ -299,7 +303,7 @@ var monsterDic = {
 
 var monsterNames = {
 	monster1: "Slime", monster2: "Mork", monster3: "Imp", monster4: "Ghoul", monster5: "Living Painting", monster6: "BOSS: Eyegor",
-	monster7: "PLACEHOLDER"
+	monster7: "PLACEHOLDER "
 	}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -769,17 +773,20 @@ func _on_monster_button_pressed() -> void:
 					monsterKillcount -= 1
 					if monsterKillcount == 0:
 						monsterMap += 1
-						monsterKillcount += (5 + monsterMap)
+						monsterKillcount += (10 * monsterMap)
 				monsterHP = monsterHPMax
 				monsterHPReset = 0
 				tempGold = (randi_range(1,(3 + draconicSorcererUpgrade1Level)) * monsterGold) * (1 + .01 * prestigeBonus1Level)
-				print("Click Gold Gain: " + str(tempGold))
 				gold += tempGold
 				lifetimeGold += tempGold
 				$MonsterButton/GoldGainedLabel.text = str(int(tempGold)) + " gold!"
 	
 	if clickPower >= monsterHPMax:
-		monsterKillcount -= 1
+		if monsterFrame == monsterMap:
+					monsterKillcount -= 1
+					if monsterKillcount == 0:
+						monsterMap += 1
+						monsterKillcount += (10 * monsterMap)
 		var n = floor(clickPower/monsterHPMax)
 		tempGold = (randi_range(1,(3 + draconicSorcererUpgrade1Level)) * monsterGold) * (1 + .01 * prestigeBonus1Level) * n
 		gold += tempGold
